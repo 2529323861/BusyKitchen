@@ -2,6 +2,7 @@ import i18n from '@root/i18n';
 import { Singleton } from './framework/common/Singleton';
 import { GameLogicMgr } from './gameplay/mgr/GameLogicMgr';
 import { InteractiveMgr } from './gameplay/mgr/InteractiveMgr';
+import { JsonDataMgr } from './gameplay/mgr/JsonDataMgr';
 
 // 由于服务端中用户群体广泛，来源多样，建议在每个 t 函数中显式传入当前用户的语言标识，以确保多语言内容能够正确匹配用户所需的语言版本。
 console.log('(server)：', i18n.t('welcome_game', { lng: 'zh-CN' }));
@@ -20,6 +21,7 @@ export class App extends Singleton<App>() {
   /** 传递初始化 */
   public init(): void {
     console.log('(server)：App init');
+    JsonDataMgr.instance.init();
     GameLogicMgr.instance.init();
     InteractiveMgr.instance.init();
   }
@@ -54,6 +56,7 @@ export class App extends Singleton<App>() {
   private destroy(): void {
     GameLogicMgr.instance.destroy();
     InteractiveMgr.instance.destroy();
+    JsonDataMgr.instance.destory();
 
     /** 停止更新间隔 */
     if (this._updateInterval) {
