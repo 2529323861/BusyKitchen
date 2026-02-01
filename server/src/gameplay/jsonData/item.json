@@ -26,21 +26,21 @@
       "id": "1003",
       "name": "生牛肉",
       "discription": "鲜嫩多汁，蛋白质丰富",
-      "fryable": true,
+      "fryable": false,
       "afterFry": "none",
       "boilable": false,
       "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "cuttable": true,
+      "afterCut": "1004"
     },
     {
       "id": "1004",
       "name": "生切牛肉",
       "discription": "切过的生牛肉，刀工尽显厨师心意，可以直接烹饪",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
+      "fryable": true,
+      "afterFry": "1005",
+      "boilable": true,
+      "afterBoil": "1009",
       "cuttable": false,
       "afterCut": "none"
     },
@@ -63,8 +63,8 @@
       "afterFry": "none",
       "boilable": false,
       "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "cuttable": true,
+      "afterCut": "1007"
     },
     {
       "id": "1007",
@@ -85,8 +85,8 @@
       "afterFry": "none",
       "boilable": false,
       "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "cuttable": true,
+      "afterCut": "1009"
     },
     {
       "id": "1009",
