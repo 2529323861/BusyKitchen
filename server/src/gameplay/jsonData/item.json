@@ -1,6 +1,17 @@
 {
   "item": [
     {
+      "id": "1000",
+      "name": "空",
+      "discription": "手上什么都没有",
+      "fryable": false,
+      "afterFry": "none",
+      "boilable": false,
+      "afterBoil": "none",
+      "cuttable": false,
+      "afterCut": "none"
+    },
+    {
       "id": "1001",
       "name": "盘子",
       "discription": "用于盛放食物的盘子",
