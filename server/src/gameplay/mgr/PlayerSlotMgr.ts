@@ -54,6 +54,7 @@ export class PlayerSlotMgr extends Singleton<PlayerSlotMgr>() {
    */
   public setPlayerSlot(userId: string, item: IItemData): void {
     this._playerSlotMap.set(userId, item);
+    /** 这里预留逻辑用于更新UI */
   }
 
   /**

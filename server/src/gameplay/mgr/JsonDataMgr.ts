@@ -18,5 +18,9 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   public getDateFromItemMap(id: string): IItemData {
     return this._itemMap.get(id) as IItemData;
   }
+  public start(): void {}
+
+  public update(delta: number): void {}
+
   public destory(): void {}
 }
