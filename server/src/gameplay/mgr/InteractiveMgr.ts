@@ -76,6 +76,20 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     this._interactiveMap.delete(token);
   }
 
+  /** 启用所有交互点 */
+  public enableAllInteractive(): void {
+    this._interactiveMap.forEach((value) => {
+      value.enable();
+    });
+  }
+
+  /** 禁用所有交互点 */
+  public disableAllInteractive(): void {
+    this._interactiveMap.forEach((value) => {
+      value.disable();
+    });
+  }
+
   public start(): void {
     /** 传递启动 */
     this._interactiveMap.forEach((value) => {
