@@ -1,6 +1,7 @@
 import { Singleton } from '../../framework/common/Singleton';
 import type { IItemData } from '../entity/item/BaseItem';
 import { JsonDataMgr } from './JsonDataMgr';
+import { PlayerEntityMgr } from './PlayerEntityMgr';
 
 export class PlayerSlotMgr extends Singleton<PlayerSlotMgr>() {
   private _playerSlotMap: Map<string, IItemData> = new Map();
@@ -54,6 +55,9 @@ export class PlayerSlotMgr extends Singleton<PlayerSlotMgr>() {
    */
   public setPlayerSlot(userId: string, item: IItemData): void {
     this._playerSlotMap.set(userId, item);
+    console.log(
+      `(server): 已将 ${item.name} 放入玩家 ${(PlayerEntityMgr.instance.getPlayerEntity(userId) as GamePlayerEntity).player.name} 的背包`
+    );
     /** 这里预留逻辑用于更新UI */
   }
 
