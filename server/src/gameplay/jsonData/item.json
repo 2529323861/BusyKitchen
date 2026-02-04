@@ -3,167 +3,77 @@
     {
       "id": "1000",
       "name": "空",
-      "discription": "手上什么都没有",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "手上什么都没有"
     },
     {
       "id": "1001",
       "name": "盘子",
-      "discription": "用于盛放食物的盘子",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "用于盛放食物的盘子"
     },
     {
       "id": "1002",
       "name": "面包",
-      "discription": "看起来很松软",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "看起来很松软"
     },
     {
       "id": "1003",
       "name": "生牛肉",
-      "discription": "鲜嫩多汁，蛋白质丰富",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": true,
-      "afterCut": "1004"
+      "discription": "鲜嫩多汁，蛋白质丰富"
     },
     {
       "id": "1004",
       "name": "生切牛肉",
-      "discription": "切过的生牛肉，刀工尽显厨师心意，可以直接烹饪",
-      "fryable": true,
-      "afterFry": "1005",
-      "boilable": true,
-      "afterBoil": "1009",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "切过的生牛肉，刀工尽显厨师心意，可以直接烹饪"
     },
     {
       "id": "1005",
       "name": "熟切牛肉",
-      "discription": "切过且烹饪过的牛肉，可以直接食用",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "切过且烹饪过的牛肉，可以直接食用"
     },
     {
       "id": "1006",
       "name": "生菜",
-      "discription": "“都是大棚的生菜，你嫌贵我还嫌贵呢”",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": true,
-      "afterCut": "1007"
+      "discription": "“都是大棚的生菜，你嫌贵我还嫌贵呢”"
     },
     {
       "id": "1007",
       "name": "切生菜",
-      "discription": "“我是不会吃生菜的”",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "“我是不会吃生菜的”"
     },
     {
       "id": "1008",
       "name": "番茄",
-      "discription": "新鲜采摘，酸甜可口",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": true,
-      "afterCut": "1009"
+      "discription": "新鲜采摘，酸甜可口"
     },
     {
       "id": "1009",
       "name": "切番茄",
-      "discription": "切过的番茄，还是那么酸甜可口",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "切过的番茄，还是那么酸甜可口"
     },
     {
       "id": "1009",
       "name": "牛肉汤",
-      "discription": "真的不想来一点吗",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "真的不想来一点吗"
     },
     {
       "id": "1010",
       "name": "荤汉堡",
-      "discription": "他们管这叫安格斯厚牛堡",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "他们管这叫安格斯厚牛堡"
     },
     {
       "id": "1011",
       "name": "荤素汉堡",
-      "discription": "看起来有些健康",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "看起来有些健康"
     },
     {
       "id": "1012",
       "name": "营养汉堡",
-      "discription": "确实营养",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "确实营养"
     },
     {
       "id": "1013",
       "name": "锅灰",
-      "discription": "熟过头了，你总不想吃这个玩意吧",
-      "fryable": false,
-      "afterFry": "none",
-      "boilable": false,
-      "afterBoil": "none",
-      "cuttable": false,
-      "afterCut": "none"
+      "discription": "熟过头了，你总不想吃这个玩意吧"
     }
   ]
 }
