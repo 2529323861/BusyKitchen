@@ -22,6 +22,7 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
     });
   }
 
+  /** 从物品数据中获取数据 */
   public getDateFromItemMap(id: string): IItemData {
     return this._itemMap.get(id) as IItemData;
   }
