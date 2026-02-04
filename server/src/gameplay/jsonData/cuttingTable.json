@@ -1,0 +1,16 @@
+{
+  "cuttingTable": [
+    {
+      "material": "1003",
+      "product": "1004"
+    },
+    {
+      "material": "1006",
+      "product": "1007"
+    },
+    {
+      "material": "1008",
+      "product": "1009"
+    }
+  ]
+}

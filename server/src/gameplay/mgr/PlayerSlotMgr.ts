@@ -1,5 +1,5 @@
 import { Singleton } from '../../framework/common/Singleton';
-import type { IItemData } from '../entity/item/BaseItem';
+import type { IItemData } from '../jsonData/DataInterface';
 import { JsonDataMgr } from './JsonDataMgr';
 import { PlayerEntityMgr } from './PlayerEntityMgr';
 

@@ -1,5 +1,5 @@
 import { PlayerSlotMgr } from '../../mgr/PlayerSlotMgr';
-import type { IItemData } from '../item/BaseItem';
+import type { IItemData } from '../../jsonData/DataInterface';
 import { BaseInteractive } from './BaseInteractive';
 
 export class ItemSource extends BaseInteractive {
