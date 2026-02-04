@@ -1,6 +1,7 @@
 import { Singleton } from '../../framework/common/Singleton';
 import { InteractiveConst } from '../const/interactiveConst';
 import type { BaseInteractive } from '../entity/interactive/BaseInteractive';
+import { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { ItemSource } from '../entity/interactive/ItemSource';
 import { JsonDataMgr } from './JsonDataMgr';
 
@@ -49,6 +50,41 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       new ItemSource(
         world.querySelector('#interactionPoint_LETTUCE') as GameEntity,
         JsonDataMgr.instance.getDateFromItemMap('1006')
+      )
+    );
+    /** 注册1号刀板 */
+    this.addInteractive(
+      InteractiveConst.CuttingBoard1,
+      new CuttingBoard(
+        world.querySelector('#interactionPoint_CUTTINGBOARD_1') as GameEntity
+      )
+    );
+    /** 注册2号刀板 */
+    this.addInteractive(
+      InteractiveConst.CuttingBoard2,
+      new CuttingBoard(
+        world.querySelector('#interactionPoint_CUTTINGBOARD_2') as GameEntity
+      )
+    );
+    /** 注册3号刀板 */
+    this.addInteractive(
+      InteractiveConst.CuttingBoard3,
+      new CuttingBoard(
+        world.querySelector('#interactionPoint_CUTTINGBOARD_3') as GameEntity
+      )
+    );
+    /** 注册4号刀板 */
+    this.addInteractive(
+      InteractiveConst.CuttingBoard4,
+      new CuttingBoard(
+        world.querySelector('#interactionPoint_CUTTINGBOARD_4') as GameEntity
+      )
+    );
+    /** 注册5号刀板 */
+    this.addInteractive(
+      InteractiveConst.CuttingBoard5,
+      new CuttingBoard(
+        world.querySelector('#interactionPoint_CUTTINGBOARD_5') as GameEntity
       )
     );
 

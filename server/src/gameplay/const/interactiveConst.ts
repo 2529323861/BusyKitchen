@@ -9,4 +9,14 @@ export const enum InteractiveConst {
   BeefSource = 'BeefSource',
   /** 无限生菜源 */
   LettuceSource = 'LettuceSource',
+  /** 刀板1 */
+  CuttingBoard1 = 'CuttingBoard1',
+  /** 刀板2 */
+  CuttingBoard2 = 'CuttingBoard2',
+  /** 刀板3 */
+  CuttingBoard3 = 'CuttingBoard3',
+  /** 刀板4 */
+  CuttingBoard4 = 'CuttingBoard4',
+  /** 刀板5 */
+  CuttingBoard5 = 'CuttingBoard5',
 }
