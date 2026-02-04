@@ -15,7 +15,7 @@ export const enum GameplayState {
  */
 export const enum CuttingBoardState {
   /** 刀板闲置 */
-  IdleState = 'IdleState',
+  BoardIdleState = 'BoardIdleState',
   /** 刀板上有菜但是未开始加工 */
   NotStartedState = 'NotStartedState',
   /** 刀板上有菜且进行了部分加工 */
@@ -29,7 +29,7 @@ export const enum CuttingBoardState {
  */
 export const enum StoveState {
   /** 灶台闲置 */
-  IdleState = 'IdleState',
+  StoveIdleState = 'StoveIdleState',
   /** 灶台加工中 */
   CookingState = 'CookingState',
   /** 灶台加工完毕 */
