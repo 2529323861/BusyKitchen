@@ -1,6 +1,10 @@
+import type { InteractiveStateMachine } from './InteractiveStateMachine';
+
 export class BaseInteractive {
   /** 场景中的交互点实体 */
   public _entity: GameEntity;
+
+  public _stateMachine?: InteractiveStateMachine | null;
 
   constructor(entity: GameEntity) {
     /** 绑定场景中的交互点实体 */
