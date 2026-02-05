@@ -3,7 +3,10 @@ import { StateMachine } from '../../../../framework/common/StateMachine';
 import { BaseInteractive } from '../BaseInteractive';
 import { CuttingBoardState } from '../../../const/stateConst';
 import { BoardIdleState } from './state/BoardIdleState';
-import type { IItemData } from '../../../jsonData/DataInterface';
+import type {
+  ICuttingTableData,
+  IItemData,
+} from '../../../jsonData/DataInterface';
 import { JsonDataMgr } from '../../../mgr/JsonDataMgr';
 import { NotStartedState } from './state/NotStartedState';
 import { CuttingState } from './state/CuttingState';
@@ -17,6 +20,12 @@ export class CuttingBoard extends BaseInteractive {
     name: '空',
     discription: '手上啥也没有',
   };
+
+  /** 被点击的次数 */
+  private _clickCount: number = 0;
+
+  /** 最大点击次数 */
+  private MAX_CLICK_COUNT = 3;
 
   constructor(entity: GameEntity) {
     super(entity);
@@ -115,8 +124,71 @@ export class CuttingBoard extends BaseInteractive {
         case CuttingBoardState.CuttingState:
           break;
         case CuttingBoardState.CuttingFinishState:
+          {
+            const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+              entity.player.userId
+            );
+            if (playerItem.id === '1000') {
+              /** 玩家手中物品为空 */
+
+              const product = JsonDataMgr.instance.getDateFromItemMap(
+                (
+                  JsonDataMgr.instance.searchCuttingTable(
+                    this.storageItem.id
+                  ) as ICuttingTableData
+                ).product
+              );
+
+              /** 将刀板中物品根据配方的合成产物取出 */
+              PlayerSlotMgr.instance.setPlayerSlot(
+                entity.player.userId,
+                product
+              );
+              this.storageItem =
+                JsonDataMgr.instance.getDateFromItemMap('1000');
+
+              console.log('(server): 玩家将结束刀板中物品取出');
+              /** 切换状态为闲置状态 */
+              this._stateMachine!.transitionTo(
+                CuttingBoardState.BoardIdleState
+              );
+            } else {
+              /** 玩家手中不为空，不可取出物品 */
+              console.log('(server): 玩家无法取出结束刀板');
+              /** 预留UI接口 */
+            }
+          }
           break;
       }
     });
+  }
+
+  /** 点击接口，用于处理点击事件 */
+  public click(): void {
+    if (
+      this._stateMachine?.getCurrentStateName() ===
+      CuttingBoardState.NotStartedState
+    ) {
+      /** 如果刀板处于未开始状态 */
+      /** 累计一次点击次数  */
+      this._clickCount = 1;
+      console.log('(server): 刀板点击并切换状态');
+      /** 切换至切菜中状态 */
+      this._stateMachine.transitionTo(CuttingBoardState.CuttingState);
+    } else if (
+      this._stateMachine?.getCurrentStateName() ===
+      CuttingBoardState.CuttingState
+    ) {
+      /** 如果已经处于切菜中状态 */
+      /** 累加一次点击次数次数 */
+      this._clickCount++;
+      console.log(`(server): 刀板点击次数: ${this._clickCount}`);
+      if (this._clickCount >= this.MAX_CLICK_COUNT) {
+        /** 如果点击次数达到最大点击次数 */
+        /** 切换至切菜完成状态 */
+        console.log('(server): 刀板点击次数达到，切换至完成状态');
+        this._stateMachine.transitionTo(CuttingBoardState.CuttingFinishState);
+      }
+    }
   }
 }

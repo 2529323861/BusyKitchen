@@ -13,9 +13,6 @@ export class BaseClickable {
   /** 初始化接口 */
   public init(): void {}
 
-  /** 事件绑定 */
-  public bindevent(): void {}
-
   /** 启动接口 */
   public start(): void {}
 

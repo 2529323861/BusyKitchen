@@ -5,6 +5,7 @@ import { InteractiveMgr } from './gameplay/mgr/InteractiveMgr';
 import { JsonDataMgr } from './gameplay/mgr/JsonDataMgr';
 import { PlayerEntityMgr } from './gameplay/mgr/PlayerEntityMgr';
 import { PlayerSlotMgr } from './gameplay/mgr/PlayerSlotMgr';
+import { ClickableMgr } from './gameplay/mgr/ClickableMgr';
 
 // 由于服务端中用户群体广泛，来源多样，建议在每个 t 函数中显式传入当前用户的语言标识，以确保多语言内容能够正确匹配用户所需的语言版本。
 console.log('(server)：', i18n.t('welcome_game', { lng: 'zh-CN' }));
@@ -26,6 +27,7 @@ export class App extends Singleton<App>() {
     JsonDataMgr.instance.init();
     GameLogicMgr.instance.init();
     InteractiveMgr.instance.init();
+    ClickableMgr.instance.init();
     PlayerEntityMgr.instance.init();
     PlayerSlotMgr.instance.init();
   }
@@ -36,6 +38,7 @@ export class App extends Singleton<App>() {
     JsonDataMgr.instance.start();
     GameLogicMgr.instance.start();
     InteractiveMgr.instance.start();
+    ClickableMgr.instance.start();
     PlayerEntityMgr.instance.start();
     PlayerSlotMgr.instance.start();
 
@@ -58,6 +61,7 @@ export class App extends Singleton<App>() {
     JsonDataMgr.instance.update(delta);
     GameLogicMgr.instance.update(delta);
     InteractiveMgr.instance.update(delta);
+    ClickableMgr.instance.update(delta);
     PlayerEntityMgr.instance.update(delta);
     PlayerSlotMgr.instance.update(delta);
   }
@@ -65,6 +69,7 @@ export class App extends Singleton<App>() {
   /** 传递销毁 */
   private destroy(): void {
     GameLogicMgr.instance.destroy();
+    ClickableMgr.instance.destory();
     InteractiveMgr.instance.destroy();
     PlayerEntityMgr.instance.destroy();
     PlayerSlotMgr.instance.destory();
