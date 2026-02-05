@@ -7,3 +7,13 @@ export interface ICuttingTableData {
   material: string;
   product: string;
 }
+
+export interface IBoilTableData {
+  material: string;
+  product: string;
+}
+
+export interface IFryTableData {
+  material: string;
+  product: string;
+}
