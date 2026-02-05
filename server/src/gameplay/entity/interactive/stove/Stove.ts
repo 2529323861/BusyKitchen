@@ -62,4 +62,7 @@ export class Stove extends BaseInteractive {
     this._stateMachine.init();
     this.bindevent();
   }
+  public update(delta: number): void {
+    this._stateMachine?.update(delta);
+  }
 }

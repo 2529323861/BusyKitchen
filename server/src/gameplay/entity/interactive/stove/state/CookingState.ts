@@ -14,6 +14,7 @@ export class CookingState implements IState {
     this._interactive = controller;
   }
   onEnter(prevState: string): void {
+    console.log('(server): 开始烹饪');
     this._timer = this.COOKINGTIME;
   }
   onUpdate(deltaTime: number): void {

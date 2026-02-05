@@ -19,4 +19,12 @@ export const enum InteractiveConst {
   CuttingBoard4 = 'CuttingBoard4',
   /** 刀板5 */
   CuttingBoard5 = 'CuttingBoard5',
+  /** 煎锅1 */
+  FryStove1 = 'FryStove1',
+  /** 煎锅2 */
+  FryStove2 = 'FryStove2',
+  /** 锅炉1 */
+  BoilStove1 = 'BoilStove1',
+  /** 锅炉2 */
+  BoilStove2 = 'BoilStove2',
 }
