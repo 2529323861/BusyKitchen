@@ -173,6 +173,7 @@ export class CuttingBoard extends BaseInteractive {
       /** 累计一次点击次数  */
       this._clickCount = 1;
       console.log('(server): 刀板点击并切换状态');
+      console.log(`(server): 刀板点击次数: ${this._clickCount}`);
       /** 切换至切菜中状态 */
       this._stateMachine.transitionTo(CuttingBoardState.CuttingState);
     } else if (
