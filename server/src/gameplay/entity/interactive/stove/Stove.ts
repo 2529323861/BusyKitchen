@@ -1,12 +1,30 @@
-import type { IStateConfig } from '../../../../framework/common/StateMachine';
+import {
+  StateMachine,
+  type IStateConfig,
+} from '../../../../framework/common/StateMachine';
 import { StoveState } from '../../../const/stateConst';
+import type { IItemData } from '../../../jsonData/DataInterface';
+import { JsonDataMgr } from '../../../mgr/JsonDataMgr';
 import { BaseInteractive } from '../BaseInteractive';
+import { BurntPotState } from './state/BurntPotState';
+import { CleaningState } from './state/CleaningState';
+import { CookingFinishState } from './state/CookingFinishState';
+import { CookingState } from './state/CookingState';
+import { StoveIdleState } from './state/StoveIdleState';
 
 export class Stove extends BaseInteractive {
+  protected storageItem: IItemData = {
+    id: '1000',
+    name: '空',
+    discription: '手上啥也没有',
+  };
+
   constructor(entity: GameEntity) {
     super(entity);
   }
+
   public init(): void {
+    this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
     this.interactRadius = 3;
     const stateConfig: IStateConfig = {
       initialState: StoveState.StoveIdleState,
@@ -34,5 +52,14 @@ export class Stove extends BaseInteractive {
         },
       },
     };
+    this._stateMachine = new StateMachine(stateConfig);
+    this._stateMachine.addState(new StoveIdleState(this));
+    this._stateMachine.addState(new CookingState(this));
+    this._stateMachine.addState(new CookingFinishState(this));
+    this._stateMachine.addState(new BurntPotState(this));
+    this._stateMachine.addState(new CleaningState(this));
+
+    this._stateMachine.init();
+    this.bindevent();
   }
 }
