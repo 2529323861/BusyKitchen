@@ -2,7 +2,7 @@ import type { StateMachine } from '../../../framework/common/StateMachine';
 
 export class BaseInteractive {
   /** 场景中的交互点实体 */
-  public _entity: GameEntity;
+  protected _entity: GameEntity;
 
   public _stateMachine?: StateMachine | null;
 
