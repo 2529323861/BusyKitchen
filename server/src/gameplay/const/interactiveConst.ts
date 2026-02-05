@@ -27,4 +27,6 @@ export const enum InteractiveConst {
   BoilStove1 = 'BoilStove1',
   /** 锅炉2 */
   BoilStove2 = 'BoilStove2',
+  /** 垃圾桶 */
+  Dustbin = 'Dustbin',
 }

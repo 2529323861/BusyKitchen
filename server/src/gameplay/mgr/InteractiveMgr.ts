@@ -2,6 +2,7 @@ import { Singleton } from '../../framework/common/Singleton';
 import { InteractiveConst } from '../const/interactiveConst';
 import type { BaseInteractive } from '../entity/interactive/BaseInteractive';
 import { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
+import { Dustbin } from '../entity/interactive/Dustbin';
 import { ItemSource } from '../entity/interactive/ItemSource';
 import { BoilStove } from '../entity/interactive/stove/BoilStove';
 import { FryStove } from '../entity/interactive/stove/FryStove';
@@ -115,6 +116,12 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.BoilStove2,
       new BoilStove(
         world.querySelector('#interactionPoint_STOVE_4') as GameEntity
+      )
+    );
+    this.addInteractive(
+      InteractiveConst.Dustbin,
+      new Dustbin(
+        world.querySelector('#interactionPoint_DUSTBIN') as GameEntity
       )
     );
 
