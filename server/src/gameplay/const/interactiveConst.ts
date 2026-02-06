@@ -29,4 +29,10 @@ export const enum InteractiveConst {
   BoilStove2 = 'BoilStove2',
   /** 垃圾桶 */
   Dustbin = 'Dustbin',
+  /** 组装台1 */
+  AssemblyTable1 = 'AssemblyTable1',
+  /** 组装台2 */
+  AssemblyTable2 = 'AssemblyTable2',
+  /** 组装台3 */
+  AssemblyTable3 = 'AssemblyTable3',
 }

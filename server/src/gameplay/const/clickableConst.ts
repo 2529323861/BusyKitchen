@@ -9,4 +9,10 @@ export const enum ClickableConst {
   CuttingBoardClickable4 = 'CuttingBoardClickable4',
   /** 刀板点击点5 */
   CuttingBoardClickable5 = 'CuttingBoardClickable5',
+  /** 组装台点击点1 */
+  AssemblyTableClicker1 = 'AssemblyTableClicker1',
+  /** 组装台点击点2 */
+  AssemblyTableClicker2 = 'AssemblyTableClicker2',
+  /** 组装台点击点3 */
+  AssemblyTableClicker3 = 'AssemblyTableClicker3',
 }

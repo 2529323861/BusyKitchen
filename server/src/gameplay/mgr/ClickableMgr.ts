@@ -1,8 +1,10 @@
 import { Singleton } from '../../framework/common/Singleton';
 import { ClickableConst } from '../const/clickableConst';
 import { InteractiveConst } from '../const/interactiveConst';
+import { AssemblyTableClicker } from '../entity/clickable/AssemblyTableClicker';
 import type { BaseClickable } from '../entity/clickable/BaseClickable';
 import { CuttingBoardClicker } from '../entity/clickable/CuttingBoardClicker';
+import type { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { InteractiveMgr } from './InteractiveMgr';
 
@@ -61,6 +63,36 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
         InteractiveMgr.instance.getInteractive(
           InteractiveConst.CuttingBoard5
         ) as CuttingBoard
+      )
+    );
+    /** 注册组装台点击点1 */
+    this.addClickable(
+      ClickableConst.AssemblyTableClicker1,
+      new AssemblyTableClicker(
+        world.querySelector('#clickPoint_ASSEMBLYTABLE_1') as GameEntity,
+        InteractiveMgr.instance.getInteractive(
+          InteractiveConst.AssemblyTable1
+        ) as AssemblyTable
+      )
+    );
+    /** 注册组装台点击点2 */
+    this.addClickable(
+      ClickableConst.AssemblyTableClicker2,
+      new AssemblyTableClicker(
+        world.querySelector('#clickPoint_ASSEMBLYTABLE_2') as GameEntity,
+        InteractiveMgr.instance.getInteractive(
+          InteractiveConst.AssemblyTable2
+        ) as AssemblyTable
+      )
+    );
+    /** 注册组装台点击点3 */
+    this.addClickable(
+      ClickableConst.AssemblyTableClicker3,
+      new AssemblyTableClicker(
+        world.querySelector('#clickPoint_ASSEMBLYTABLE_3') as GameEntity,
+        InteractiveMgr.instance.getInteractive(
+          InteractiveConst.AssemblyTable3
+        ) as AssemblyTable
       )
     );
     /** 传递初始化 */

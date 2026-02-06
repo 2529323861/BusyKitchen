@@ -17,3 +17,8 @@ export interface IFryTableData {
   material: string;
   product: string;
 }
+
+export interface IAssemblyFormulaData {
+  material: Array<string>;
+  product: string;
+}

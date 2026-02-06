@@ -1,5 +1,6 @@
 import { Singleton } from '../../framework/common/Singleton';
 import { InteractiveConst } from '../const/interactiveConst';
+import { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { BaseInteractive } from '../entity/interactive/BaseInteractive';
 import { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { Dustbin } from '../entity/interactive/Dustbin';
@@ -118,10 +119,32 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
         world.querySelector('#interactionPoint_STOVE_4') as GameEntity
       )
     );
+    /** 注册垃圾桶 */
     this.addInteractive(
       InteractiveConst.Dustbin,
       new Dustbin(
         world.querySelector('#interactionPoint_DUSTBIN') as GameEntity
+      )
+    );
+    /** 注册组装台1 */
+    this.addInteractive(
+      InteractiveConst.AssemblyTable1,
+      new AssemblyTable(
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_1') as GameEntity
+      )
+    );
+    /** 注册组装台2 */
+    this.addInteractive(
+      InteractiveConst.AssemblyTable2,
+      new AssemblyTable(
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_2') as GameEntity
+      )
+    );
+    /** 注册组装台3 */
+    this.addInteractive(
+      InteractiveConst.AssemblyTable3,
+      new AssemblyTable(
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_3') as GameEntity
       )
     );
 
