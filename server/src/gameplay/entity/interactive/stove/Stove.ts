@@ -13,11 +13,8 @@ import { CookingState } from './state/CookingState';
 import { StoveIdleState } from './state/StoveIdleState';
 
 export class Stove extends BaseInteractive {
-  protected storageItem: IItemData = {
-    id: '1000',
-    name: '空',
-    discription: '手上啥也没有',
-  };
+  protected storageItem: IItemData =
+    JsonDataMgr.instance.getDateFromItemMap('1000');
 
   constructor(entity: GameEntity) {
     super(entity);

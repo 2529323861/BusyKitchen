@@ -15,11 +15,8 @@ import { PlayerSlotMgr } from '../../../mgr/PlayerSlotMgr';
 
 export class CuttingBoard extends BaseInteractive {
   /** 刀板暂存物默认为空 */
-  public storageItem: IItemData = {
-    id: '1000',
-    name: '空',
-    discription: '手上啥也没有',
-  };
+  public storageItem: IItemData =
+    JsonDataMgr.instance.getDateFromItemMap('1000');
 
   /** 被点击的次数 */
   private _clickCount: number = 0;

@@ -3,77 +3,107 @@
     {
       "id": "1000",
       "name": "空",
-      "discription": "手上什么都没有"
+      "discription": "手上什么都没有",
+      "src": "mesh/default.vb",
+      "hight": 0
     },
     {
       "id": "1001",
       "name": "盘子",
-      "discription": "用于盛放食物的盘子"
+      "discription": "用于盛放食物的盘子",
+      "src": "mesh/plate.vb",
+      "hight": 0.006
     },
     {
       "id": "1002",
       "name": "面包",
-      "discription": "看起来很松软"
+      "discription": "看起来很松软",
+      "src": "mesh/bread.vb",
+      "hight": 0.095
     },
     {
       "id": "1003",
       "name": "生牛肉",
-      "discription": "鲜嫩多汁，蛋白质丰富"
+      "discription": "鲜嫩多汁，蛋白质丰富",
+      "src": "mesh/beef.vb",
+      "hight": 0.05
     },
     {
       "id": "1004",
       "name": "生切牛肉",
-      "discription": "切过的生牛肉，刀工尽显厨师心意，可以直接烹饪"
+      "discription": "切过的生牛肉，刀工尽显厨师心意，可以直接烹饪",
+      "src": "mesh/beef_cutted.vb",
+      "hight": 0.05
     },
     {
       "id": "1005",
       "name": "熟切牛肉",
-      "discription": "切过且烹饪过的牛肉，可以直接食用"
+      "discription": "切过且烹饪过的牛肉，可以直接食用",
+      "src": "mesh/beef_cutted_fried.vb",
+      "hight": 0.05
     },
     {
       "id": "1006",
       "name": "生菜",
-      "discription": "“都是大棚的生菜，你嫌贵我还嫌贵呢”"
+      "discription": "“都是大棚的生菜，你嫌贵我还嫌贵呢”",
+      "src": "mesh/lettuce.vb",
+      "hight": 0.25
     },
     {
       "id": "1007",
       "name": "切生菜",
-      "discription": "“我是不会吃生菜的”"
+      "discription": "“我是不会吃生菜的”",
+      "src": "mesh/lettuce_cutted.vb",
+      "hight": 0.006
     },
     {
       "id": "1008",
       "name": "番茄",
-      "discription": "新鲜采摘，酸甜可口"
+      "discription": "新鲜采摘，酸甜可口",
+      "src": "mesh/tomato.vb",
+      "hight": 0.1
     },
     {
       "id": "1009",
       "name": "切番茄",
-      "discription": "切过的番茄，还是那么酸甜可口"
+      "discription": "切过的番茄，还是那么酸甜可口",
+      "src": "mesh/tomato_cutted.vb",
+      "hight": 0.006
     },
     {
       "id": "1009",
       "name": "牛肉汤",
-      "discription": "真的不想来一点吗"
+      "discription": "真的不想来一点吗",
+      "src": "mesh/beef_soup.vb",
+      "hight": 0.1
     },
     {
       "id": "1010",
       "name": "荤汉堡",
-      "discription": "他们管这叫安格斯厚牛堡"
+      "discription": "他们管这叫安格斯厚牛堡",
+      "src": "mesh/burger_lv1.vb",
+      "hight": 0.106
     },
     {
       "id": "1011",
       "name": "荤素汉堡",
-      "discription": "看起来有些健康"
+      "discription": "看起来有些健康",
+      "src": "mesh/burger_lv2.vb",
+      "hight": 0.155
     },
     {
       "id": "1012",
       "name": "营养汉堡",
-      "discription": "确实营养"
+      "discription": "确实营养",
+      "src": "mesh/burger_lv3.vb",
+      "hight": 0.23
     },
     {
       "id": "1013",
       "name": "锅灰",
-      "discription": "熟过头了，你总不想吃这个玩意吧"
+      "discription": "熟过头了，你总不想吃这个玩意吧",
+      "src": "mesh/ash.vb",
+      "hight": 0.1
     }
   ]
 }

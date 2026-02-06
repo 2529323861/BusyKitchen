@@ -2,6 +2,8 @@ export interface IItemData {
   id: string;
   name: string;
   discription: string;
+  src: string;
+  hight: number;
 }
 export interface ICuttingTableData {
   material: string;
