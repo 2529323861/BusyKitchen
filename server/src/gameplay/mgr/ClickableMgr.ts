@@ -20,9 +20,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.CuttingBoardClickable1,
       new CuttingBoardClicker(
         world.querySelector('#clickPoint_CUTTINGBOARD_1') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.CuttingBoard1
-        ) as CuttingBoard
+        InteractiveConst.CuttingBoard1
       )
     );
     /** 注册刀板点击点2 */
@@ -30,9 +28,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.CuttingBoardClickable2,
       new CuttingBoardClicker(
         world.querySelector('#clickPoint_CUTTINGBOARD_2') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.CuttingBoard2
-        ) as CuttingBoard
+        InteractiveConst.CuttingBoard2
       )
     );
     /** 注册刀板点击点3 */
@@ -40,9 +36,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.CuttingBoardClickable3,
       new CuttingBoardClicker(
         world.querySelector('#clickPoint_CUTTINGBOARD_3') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.CuttingBoard3
-        ) as CuttingBoard
+        InteractiveConst.CuttingBoard3
       )
     );
     /** 注册刀板点击点4 */
@@ -50,9 +44,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.CuttingBoardClickable4,
       new CuttingBoardClicker(
         world.querySelector('#clickPoint_CUTTINGBOARD_4') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.CuttingBoard4
-        ) as CuttingBoard
+        InteractiveConst.CuttingBoard4
       )
     );
     /** 注册刀板点击点5 */
@@ -60,9 +52,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.CuttingBoardClickable5,
       new CuttingBoardClicker(
         world.querySelector('#clickPoint_CUTTINGBOARD_5') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.CuttingBoard5
-        ) as CuttingBoard
+        InteractiveConst.CuttingBoard5
       )
     );
     /** 注册组装台点击点1 */
@@ -70,9 +60,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.AssemblyTableClicker1,
       new AssemblyTableClicker(
         world.querySelector('#clickPoint_ASSEMBLYTABLE_1') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.AssemblyTable1
-        ) as AssemblyTable
+        InteractiveConst.AssemblyTable1
       )
     );
     /** 注册组装台点击点2 */
@@ -80,9 +68,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.AssemblyTableClicker2,
       new AssemblyTableClicker(
         world.querySelector('#clickPoint_ASSEMBLYTABLE_2') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.AssemblyTable2
-        ) as AssemblyTable
+        InteractiveConst.AssemblyTable2
       )
     );
     /** 注册组装台点击点3 */
@@ -90,9 +76,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       ClickableConst.AssemblyTableClicker3,
       new AssemblyTableClicker(
         world.querySelector('#clickPoint_ASSEMBLYTABLE_3') as GameEntity,
-        InteractiveMgr.instance.getInteractive(
-          InteractiveConst.AssemblyTable3
-        ) as AssemblyTable
+        InteractiveConst.AssemblyTable3
       )
     );
     /** 传递初始化 */
