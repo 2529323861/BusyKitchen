@@ -2,7 +2,7 @@ export interface IItemData {
   id: string;
   name: string;
   discription: string;
-  src: string;
+  src: GameModelAssets;
   hight: number;
 }
 export interface ICuttingTableData {
