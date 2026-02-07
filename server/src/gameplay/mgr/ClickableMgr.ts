@@ -6,6 +6,7 @@ import type { BaseClickable } from '../entity/clickable/BaseClickable';
 import { CuttingBoardClicker } from '../entity/clickable/CuttingBoardClicker';
 import { DustbinClicker } from '../entity/clickable/DustbinClicker';
 import { ItemSourceClicker } from '../entity/clickable/ItemSourceClicker';
+import { StoveClicker } from '../entity/clickable/StoveClicker';
 import type { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { InteractiveMgr } from './InteractiveMgr';
@@ -127,6 +128,38 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       new DustbinClicker(
         world.querySelector('#clickPoint_ITEMSOURCE_DUSTBIN') as GameEntity,
         InteractiveConst.Dustbin
+      )
+    );
+    /** 注册灶台点击点1 */
+    this.addClickable(
+      ClickableConst.StoveClicker1,
+      new StoveClicker(
+        world.querySelector('#clickPoint_STOVE_1') as GameEntity,
+        InteractiveConst.FryStove1
+      )
+    );
+    /** 注册灶台点击点2 */
+    this.addClickable(
+      ClickableConst.StoveClicker2,
+      new StoveClicker(
+        world.querySelector('#clickPoint_STOVE_2') as GameEntity,
+        InteractiveConst.FryStove2
+      )
+    );
+    /** 注册灶台点击点3 */
+    this.addClickable(
+      ClickableConst.StoveClicker3,
+      new StoveClicker(
+        world.querySelector('#clickPoint_STOVE_3') as GameEntity,
+        InteractiveConst.BoilStove1
+      )
+    );
+    /** 注册灶台点击点4 */
+    this.addClickable(
+      ClickableConst.StoveClicker4,
+      new StoveClicker(
+        world.querySelector('#clickPoint_STOVE_4') as GameEntity,
+        InteractiveConst.BoilStove2
       )
     );
 

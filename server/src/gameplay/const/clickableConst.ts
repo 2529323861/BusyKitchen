@@ -27,4 +27,12 @@ export const enum ClickableConst {
   LettuceSource = 'LettuceSource',
   /** 垃圾桶 */
   Dustbin = 'Dustbin',
+  /** 灶台点击点1 */
+  StoveClicker1 = 'StoveClicker1',
+  /** 灶台点击点2 */
+  StoveClicker2 = 'StoveClicker2',
+  /** 灶台点击点3 */
+  StoveClicker3 = 'StoveClicker3',
+  /** 灶台点击点4 */
+  StoveClicker4 = 'StoveClicker4',
 }
