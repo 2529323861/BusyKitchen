@@ -12,11 +12,15 @@ import { NotStartedState } from './state/NotStartedState';
 import { CuttingState } from './state/CuttingState';
 import { CuttingFinishState } from './state/CuttingFinishState';
 import { PlayerSlotMgr } from '../../../mgr/PlayerSlotMgr';
+import { AnimationMgr } from '../../../mgr/AnimationMgr';
+import type { CuttingBoardAnimation } from '../../AnimationEntity/CuttingBoardAnimation';
 
 export class CuttingBoard extends BaseInteractive {
   /** 刀板暂存物默认为空 */
   public storageItem: IItemData =
     JsonDataMgr.instance.getDateFromItemMap('1000');
+
+  private _animationToken: string;
 
   /** 被点击的次数 */
   private _clickCount: number = 0;
@@ -24,8 +28,9 @@ export class CuttingBoard extends BaseInteractive {
   /** 最大点击次数 */
   private MAX_CLICK_COUNT = 3;
 
-  constructor(entity: GameEntity) {
+  constructor(entity: GameEntity, animationToken: string) {
     super(entity);
+    this._animationToken = animationToken;
   }
   public init(): void {
     this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
@@ -63,6 +68,10 @@ export class CuttingBoard extends BaseInteractive {
   }
   public bindevent(): void {
     this._entity.onInteract(({ entity }) => {
+      /** 获取对应动画用实体 */
+      const animation = AnimationMgr.instance.getAnimation(
+        this._animationToken
+      ) as CuttingBoardAnimation;
       switch (this._stateMachine?.getCurrentStateName()) {
         case CuttingBoardState.BoardIdleState:
           {
@@ -79,6 +88,8 @@ export class CuttingBoard extends BaseInteractive {
                 JsonDataMgr.instance.getDateFromItemMap('1000')
               );
               /** 状态切换至未开始状态 */
+              /** 更新动画 */
+              animation.changeAnimation(this.storageItem.src);
               console.log('(server): 玩家用可交互物品交互闲置刀板');
               this._stateMachine!.transitionTo(
                 CuttingBoardState.NotStartedState
@@ -105,6 +116,9 @@ export class CuttingBoard extends BaseInteractive {
               );
               this.storageItem =
                 JsonDataMgr.instance.getDateFromItemMap('1000');
+
+              /** 更新动画 */
+              animation.changeAnimation(this.storageItem.src);
 
               console.log('(server): 玩家将未开始刀板中物品取出');
               /** 切换状态为闲置状态 */
@@ -144,6 +158,9 @@ export class CuttingBoard extends BaseInteractive {
               this.storageItem =
                 JsonDataMgr.instance.getDateFromItemMap('1000');
 
+              /** 更新动画 */
+              animation.changeAnimation(this.storageItem.src);
+
               console.log('(server): 玩家将结束刀板中物品取出');
               /** 切换状态为闲置状态 */
               this._stateMachine!.transitionTo(
@@ -162,6 +179,10 @@ export class CuttingBoard extends BaseInteractive {
 
   /** 点击接口，用于处理点击事件 */
   public click(): void {
+    /** 获取动画用实体 */
+    const animation = AnimationMgr.instance.getAnimation(
+      this._animationToken
+    ) as CuttingBoardAnimation;
     if (
       this._stateMachine?.getCurrentStateName() ===
       CuttingBoardState.NotStartedState
@@ -185,6 +206,15 @@ export class CuttingBoard extends BaseInteractive {
         /** 如果点击次数达到最大点击次数 */
         /** 切换至切菜完成状态 */
         console.log('(server): 刀板点击次数达到，切换至完成状态');
+        /** 更新动画 */
+        const { product } = JsonDataMgr.instance.searchCuttingTable(
+          this.storageItem.id
+        )!;
+
+        animation.changeAnimation(
+          JsonDataMgr.instance.getDateFromItemMap(product).src
+        );
+
         this._stateMachine.transitionTo(CuttingBoardState.CuttingFinishState);
       }
     }

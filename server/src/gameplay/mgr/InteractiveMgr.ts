@@ -1,4 +1,5 @@
 import { Singleton } from '../../framework/common/Singleton';
+import { AnimationConst } from '../const/AnimationConst';
 import { InteractiveConst } from '../const/interactiveConst';
 import { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { BaseInteractive } from '../entity/interactive/BaseInteractive';
@@ -60,35 +61,40 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     this.addInteractive(
       InteractiveConst.CuttingBoard1,
       new CuttingBoard(
-        world.querySelector('#interactionPoint_CUTTINGBOARD_1') as GameEntity
+        world.querySelector('#interactionPoint_CUTTINGBOARD_1') as GameEntity,
+        AnimationConst.CuttingBoardAnimation1
       )
     );
     /** 注册2号刀板 */
     this.addInteractive(
       InteractiveConst.CuttingBoard2,
       new CuttingBoard(
-        world.querySelector('#interactionPoint_CUTTINGBOARD_2') as GameEntity
+        world.querySelector('#interactionPoint_CUTTINGBOARD_2') as GameEntity,
+        AnimationConst.CuttingBoardAnimation2
       )
     );
     /** 注册3号刀板 */
     this.addInteractive(
       InteractiveConst.CuttingBoard3,
       new CuttingBoard(
-        world.querySelector('#interactionPoint_CUTTINGBOARD_3') as GameEntity
+        world.querySelector('#interactionPoint_CUTTINGBOARD_3') as GameEntity,
+        AnimationConst.CuttingBoardAnimation3
       )
     );
     /** 注册4号刀板 */
     this.addInteractive(
       InteractiveConst.CuttingBoard4,
       new CuttingBoard(
-        world.querySelector('#interactionPoint_CUTTINGBOARD_4') as GameEntity
+        world.querySelector('#interactionPoint_CUTTINGBOARD_4') as GameEntity,
+        AnimationConst.CuttingBoardAnimation4
       )
     );
     /** 注册5号刀板 */
     this.addInteractive(
       InteractiveConst.CuttingBoard5,
       new CuttingBoard(
-        world.querySelector('#interactionPoint_CUTTINGBOARD_5') as GameEntity
+        world.querySelector('#interactionPoint_CUTTINGBOARD_5') as GameEntity,
+        AnimationConst.CuttingBoardAnimation5
       )
     );
     /** 注册1号煎锅 */

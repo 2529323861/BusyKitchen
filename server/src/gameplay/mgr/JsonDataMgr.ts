@@ -25,7 +25,7 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   public init(): void {
     /** 读取物品数据 */
     item.forEach((value) => {
-      this._itemMap.set(value.id, value);
+      this._itemMap.set(value.id, value as IItemData);
     });
 
     /** 读取切菜表数据 */
