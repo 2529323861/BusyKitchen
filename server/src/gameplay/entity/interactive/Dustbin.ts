@@ -16,7 +16,7 @@ export class Dustbin extends BaseInteractive {
     });
   }
   /** 交互回调封装 */
-  public interactCallback(entity: GamePlayerEntity) {
+  public interactCallback(entity: GamePlayerEntity): void {
     PlayerSlotMgr.instance.setPlayerSlot(
       entity.player.userId,
       JsonDataMgr.instance.getDateFromItemMap('1000')

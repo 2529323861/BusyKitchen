@@ -73,7 +73,7 @@ export class CuttingBoard extends BaseInteractive {
   }
 
   /** 交互回调封装 */
-  public interactCallBack(entity: GamePlayerEntity) {
+  public interactCallBack(entity: GamePlayerEntity): void {
     /** 获取对应动画用实体 */
     const animation = AnimationMgr.instance.getAnimation(
       this._animationToken

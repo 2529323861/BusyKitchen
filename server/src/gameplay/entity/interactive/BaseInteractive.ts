@@ -37,6 +37,8 @@ export class BaseInteractive {
   /** 事件绑定 */
   public bindevent(): void {}
 
+  public interactCallback(entity: GamePlayerEntity): void {}
+
   /** 启动接口 */
   public start(): void {}
 

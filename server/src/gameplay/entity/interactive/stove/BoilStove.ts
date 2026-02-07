@@ -11,7 +11,7 @@ export class BoilStove extends Stove {
     });
   }
   /** 交互回调封装 */
-  public interactCallback(entity: GamePlayerEntity) {
+  public interactCallback(entity: GamePlayerEntity): void {
     const state = this._stateMachine?.getCurrentStateName();
     switch (state) {
       case StoveState.StoveIdleState: {

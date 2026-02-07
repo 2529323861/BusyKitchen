@@ -11,7 +11,7 @@ export class FryStove extends Stove {
     });
   }
   /** 交互回调封装 */
-  public interactiveCallback(entity: GamePlayerEntity) {
+  public interactiveCallback(entity: GamePlayerEntity): void {
     const state = this._stateMachine?.getCurrentStateName();
     switch (state) {
       case StoveState.StoveIdleState: {

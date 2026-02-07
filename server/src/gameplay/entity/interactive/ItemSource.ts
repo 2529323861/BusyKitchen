@@ -23,7 +23,7 @@ export class ItemSource extends BaseInteractive {
     });
   }
   /** 交互回调封装 */
-  public interactCallback(entity: GamePlayerEntity) {
+  public interactCallback(entity: GamePlayerEntity): void {
     console.log('(server): 物品源被互动');
     PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, this._item);
   }

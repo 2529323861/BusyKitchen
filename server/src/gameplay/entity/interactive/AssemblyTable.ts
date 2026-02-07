@@ -28,7 +28,7 @@ export class AssemblyTable extends BaseInteractive {
     });
   }
   /** 交互回调封装 */
-  public interactCallback(entity: GamePlayerEntity) {
+  public interactCallback(entity: GamePlayerEntity): void {
     /** 获取组装台动画用实体 */
     const animation = AnimationMgr.instance.getAnimation(
       this._animationToken
