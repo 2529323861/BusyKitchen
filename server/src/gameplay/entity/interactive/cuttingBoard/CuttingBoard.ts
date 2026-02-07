@@ -68,113 +68,107 @@ export class CuttingBoard extends BaseInteractive {
   }
   public bindevent(): void {
     this._entity.onInteract(({ entity }) => {
-      /** 获取对应动画用实体 */
-      const animation = AnimationMgr.instance.getAnimation(
-        this._animationToken
-      ) as CuttingBoardAnimation;
-      switch (this._stateMachine?.getCurrentStateName()) {
-        case CuttingBoardState.BoardIdleState:
-          {
-            const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
-              entity.player.userId
-            );
-            if (JsonDataMgr.instance.searchCuttingTable(playerItem.id)) {
-              /** 玩家手中的东西可以切 */
-              /** 将玩家手中的东西放入刀板 */
-              this.storageItem = playerItem;
-              /** 将空放入玩家手中 */
-              PlayerSlotMgr.instance.setPlayerSlot(
-                entity.player.userId,
-                JsonDataMgr.instance.getDateFromItemMap('1000')
-              );
-              /** 状态切换至未开始状态 */
-              /** 更新动画 */
-              animation.changeAnimation(this.storageItem.src);
-              console.log('(server): 玩家用可交互物品交互闲置刀板');
-              this._stateMachine!.transitionTo(
-                CuttingBoardState.NotStartedState
-              );
-            } else {
-              /** 玩家手中的东西不可以切 */
-              console.log('(server): 玩家用不可交互物品交互闲置刀板');
-              /** 留空做UI通知 */
-            }
-          }
-          break;
-        case CuttingBoardState.NotStartedState:
-          {
-            const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
-              entity.player.userId
-            );
-            if (playerItem.id === '1000') {
-              /** 玩家手中物品为空 */
-
-              /** 将容器中物品取出 */
-              PlayerSlotMgr.instance.setPlayerSlot(
-                entity.player.userId,
-                this.storageItem
-              );
-              this.storageItem =
-                JsonDataMgr.instance.getDateFromItemMap('1000');
-
-              /** 更新动画 */
-              animation.changeAnimation(this.storageItem.src);
-
-              console.log('(server): 玩家将未开始刀板中物品取出');
-              /** 切换状态为闲置状态 */
-              this._stateMachine!.transitionTo(
-                CuttingBoardState.BoardIdleState
-              );
-            } else {
-              /** 玩家手中不为空，不可取出物品 */
-              console.log('(server): 玩家无法取出未开始刀板');
-              /** 预留UI接口 */
-            }
-          }
-          break;
-        case CuttingBoardState.CuttingState:
-          break;
-        case CuttingBoardState.CuttingFinishState:
-          {
-            const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
-              entity.player.userId
-            );
-            if (playerItem.id === '1000') {
-              /** 玩家手中物品为空 */
-
-              const product = JsonDataMgr.instance.getDateFromItemMap(
-                (
-                  JsonDataMgr.instance.searchCuttingTable(
-                    this.storageItem.id
-                  ) as ICuttingTableData
-                ).product
-              );
-
-              /** 将刀板中物品根据配方的合成产物取出 */
-              PlayerSlotMgr.instance.setPlayerSlot(
-                entity.player.userId,
-                product
-              );
-              this.storageItem =
-                JsonDataMgr.instance.getDateFromItemMap('1000');
-
-              /** 更新动画 */
-              animation.changeAnimation(this.storageItem.src);
-
-              console.log('(server): 玩家将结束刀板中物品取出');
-              /** 切换状态为闲置状态 */
-              this._stateMachine!.transitionTo(
-                CuttingBoardState.BoardIdleState
-              );
-            } else {
-              /** 玩家手中不为空，不可取出物品 */
-              console.log('(server): 玩家无法取出结束刀板');
-              /** 预留UI接口 */
-            }
-          }
-          break;
-      }
+      this.interactCallBack(entity);
     });
+  }
+
+  /** 交互回调封装 */
+  public interactCallBack(entity: GamePlayerEntity) {
+    /** 获取对应动画用实体 */
+    const animation = AnimationMgr.instance.getAnimation(
+      this._animationToken
+    ) as CuttingBoardAnimation;
+    switch (this._stateMachine?.getCurrentStateName()) {
+      case CuttingBoardState.BoardIdleState:
+        {
+          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+            entity.player.userId
+          );
+          if (JsonDataMgr.instance.searchCuttingTable(playerItem.id)) {
+            /** 玩家手中的东西可以切 */
+            /** 将玩家手中的东西放入刀板 */
+            this.storageItem = playerItem;
+            /** 将空放入玩家手中 */
+            PlayerSlotMgr.instance.setPlayerSlot(
+              entity.player.userId,
+              JsonDataMgr.instance.getDateFromItemMap('1000')
+            );
+            /** 状态切换至未开始状态 */
+            /** 更新动画 */
+            animation.changeAnimation(this.storageItem.src);
+            console.log('(server): 玩家用可交互物品交互闲置刀板');
+            this._stateMachine!.transitionTo(CuttingBoardState.NotStartedState);
+          } else {
+            /** 玩家手中的东西不可以切 */
+            console.log('(server): 玩家用不可交互物品交互闲置刀板');
+            /** 留空做UI通知 */
+          }
+        }
+        break;
+      case CuttingBoardState.NotStartedState:
+        {
+          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+            entity.player.userId
+          );
+          if (playerItem.id === '1000') {
+            /** 玩家手中物品为空 */
+
+            /** 将容器中物品取出 */
+            PlayerSlotMgr.instance.setPlayerSlot(
+              entity.player.userId,
+              this.storageItem
+            );
+            this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+
+            /** 更新动画 */
+            animation.changeAnimation(this.storageItem.src);
+
+            console.log('(server): 玩家将未开始刀板中物品取出');
+            /** 切换状态为闲置状态 */
+            this._stateMachine!.transitionTo(CuttingBoardState.BoardIdleState);
+          } else {
+            /** 玩家手中不为空，不可取出物品 */
+            console.log('(server): 玩家无法取出未开始刀板');
+            /** 预留UI接口 */
+          }
+        }
+        break;
+      case CuttingBoardState.CuttingState:
+        break;
+      case CuttingBoardState.CuttingFinishState:
+        {
+          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+            entity.player.userId
+          );
+          if (playerItem.id === '1000') {
+            /** 玩家手中物品为空 */
+
+            const product = JsonDataMgr.instance.getDateFromItemMap(
+              (
+                JsonDataMgr.instance.searchCuttingTable(
+                  this.storageItem.id
+                ) as ICuttingTableData
+              ).product
+            );
+
+            /** 将刀板中物品根据配方的合成产物取出 */
+            PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, product);
+            this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+
+            /** 更新动画 */
+            animation.changeAnimation(this.storageItem.src);
+
+            console.log('(server): 玩家将结束刀板中物品取出');
+            /** 切换状态为闲置状态 */
+            this._stateMachine!.transitionTo(CuttingBoardState.BoardIdleState);
+          } else {
+            /** 玩家手中不为空，不可取出物品 */
+            console.log('(server): 玩家无法取出结束刀板');
+            /** 预留UI接口 */
+          }
+        }
+        break;
+    }
   }
 
   /** 点击接口，用于处理点击事件 */

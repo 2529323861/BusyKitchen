@@ -12,11 +12,15 @@ export class Dustbin extends BaseInteractive {
   }
   public bindevent(): void {
     this._entity.onInteract(({ entity }) => {
-      PlayerSlotMgr.instance.setPlayerSlot(
-        entity.player.userId,
-        JsonDataMgr.instance.getDateFromItemMap('1000')
-      );
-      console.log(`(server): 已清除玩家 ${entity.player.name} 身上的物品`);
+      this.interactCallback(entity);
     });
+  }
+  /** 交互回调封装 */
+  public interactCallback(entity: GamePlayerEntity) {
+    PlayerSlotMgr.instance.setPlayerSlot(
+      entity.player.userId,
+      JsonDataMgr.instance.getDateFromItemMap('1000')
+    );
+    console.log(`(server): 已清除玩家 ${entity.player.name} 身上的物品`);
   }
 }

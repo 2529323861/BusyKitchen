@@ -19,8 +19,12 @@ export class ItemSource extends BaseInteractive {
   public bindevent(): void {
     /** 当玩家交互时，将物品源物品类型添加到玩家物品栏 */
     this._entity.onInteract(({ entity }) => {
-      console.log('(server): 物品源被互动');
-      PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, this._item);
+      this.interactCallback(entity);
     });
+  }
+  /** 交互回调封装 */
+  public interactCallback(entity: GamePlayerEntity) {
+    console.log('(server): 物品源被互动');
+    PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, this._item);
   }
 }
