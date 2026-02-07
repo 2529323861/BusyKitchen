@@ -9,4 +9,10 @@ export const enum AnimationConst {
   CuttingBoardAnimation4 = 'CuttingBoardAnimation4',
   /** 切菜板动画5 */
   CuttingBoardAnimation5 = 'CuttingBoardAnimation5',
+  /** 组装台动画1 */
+  AssemblyTableAnimation1 = 'AssemblyTableAnimation1',
+  /** 组装台动画2 */
+  AssemblyTableAnimation2 = 'AssemblyTableAnimation2',
+  /** 组装台动画3 */
+  AssemblyTableAnimation3 = 'AssemblyTableAnimation3',
 }

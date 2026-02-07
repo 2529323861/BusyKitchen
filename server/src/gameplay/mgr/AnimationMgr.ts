@@ -1,5 +1,6 @@
 import { Singleton } from '../../framework/common/Singleton';
 import { AnimationConst } from '../const/AnimationConst';
+import { AssemblyTableAnimation } from '../entity/AnimationEntity/AssemblyTableAnimation';
 import type { BaseAnimationEntity } from '../entity/AnimationEntity/BaseAnimationEntity';
 import { CuttingBoardAnimation } from '../entity/AnimationEntity/CuttingBoardAnimation';
 import type { BaseClickable } from '../entity/clickable/BaseClickable';
@@ -35,6 +36,21 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
     this.addAnimation(
       AnimationConst.CuttingBoardAnimation5,
       new CuttingBoardAnimation(new GameVector3(42, 9, 41))
+    );
+    /** 注册一号组装台动画 */
+    this.addAnimation(
+      AnimationConst.AssemblyTableAnimation1,
+      new AssemblyTableAnimation(new GameVector3(49, 9, 38))
+    );
+    /** 注册二号组装台动画 */
+    this.addAnimation(
+      AnimationConst.AssemblyTableAnimation2,
+      new AssemblyTableAnimation(new GameVector3(49, 9, 37))
+    );
+    /** 注册三号组装台动画 */
+    this.addAnimation(
+      AnimationConst.AssemblyTableAnimation3,
+      new AssemblyTableAnimation(new GameVector3(49, 9, 36))
     );
     /** 传递初始化 */
     this._animationMap.forEach((value) => {

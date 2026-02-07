@@ -1,11 +1,22 @@
 import type { IItemData } from '../../jsonData/DataInterface';
+import { AnimationMgr } from '../../mgr/AnimationMgr';
 import { JsonDataMgr } from '../../mgr/JsonDataMgr';
 import { PlayerSlotMgr } from '../../mgr/PlayerSlotMgr';
+import type { AssemblyTableAnimation } from '../AnimationEntity/AssemblyTableAnimation';
 import { BaseInteractive } from './BaseInteractive';
 
 export class AssemblyTable extends BaseInteractive {
+  /** 物品栈 */
   private _itemStack: Array<IItemData> = [];
+  /** 最大栈容量 */
   private STACK_CAPCITY = 5;
+  /** 动画用实体绑定 */
+  private _animationToken: string;
+
+  constructor(entity: GameEntity, animationToken: string) {
+    super(entity);
+    this._animationToken = animationToken;
+  }
 
   public init(): void {
     this._entity.interactRadius = 3;
@@ -13,6 +24,11 @@ export class AssemblyTable extends BaseInteractive {
   }
   public bindevent(): void {
     this._entity.onInteract(({ entity }) => {
+      /** 获取组装台动画用实体 */
+      const animation = AnimationMgr.instance.getAnimation(
+        this._animationToken
+      ) as AssemblyTableAnimation;
+      animation.start();
       if (
         PlayerSlotMgr.instance.getPlayerSlot(entity.player.userId).id === '1000'
       ) {
@@ -24,6 +40,8 @@ export class AssemblyTable extends BaseInteractive {
           /** 将物品放入玩家手中 */
           PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, item);
           console.log('(server): 玩家将组装台中物品取出');
+          /** 更新动画 */
+          animation.changeAnimation(this._itemStack);
         } else {
           /** 栈中无物品 */
           console.log('(server): 玩家空手交互空组装台');
@@ -36,6 +54,8 @@ export class AssemblyTable extends BaseInteractive {
           this._itemStack.push(
             PlayerSlotMgr.instance.getPlayerSlot(entity.player.userId)
           );
+          /** 更新动画 */
+          animation.changeAnimation(this._itemStack);
           /** 清除玩家手上物品 */
           PlayerSlotMgr.instance.setPlayerSlot(
             entity.player.userId,
@@ -51,6 +71,11 @@ export class AssemblyTable extends BaseInteractive {
     });
   }
   public assemble(): void {
+    /** 获取组装台动画用实体 */
+    const animation = AnimationMgr.instance.getAnimation(
+      this._animationToken
+    ) as AssemblyTableAnimation;
+
     console.log('(server): 玩家触发组装台合成');
     /** 构造检索用数组 */
     const materials: Array<string> = [];
@@ -67,6 +92,8 @@ export class AssemblyTable extends BaseInteractive {
       this._itemStack.push(
         JsonDataMgr.instance.getDateFromItemMap(formula.product)
       );
+      /** 更新动画 */
+      animation.changeAnimation(this._itemStack);
       console.log('(server): 玩家合成成功');
     } else {
       /** 配方不存在 */

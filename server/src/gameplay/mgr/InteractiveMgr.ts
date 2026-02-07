@@ -136,21 +136,24 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     this.addInteractive(
       InteractiveConst.AssemblyTable1,
       new AssemblyTable(
-        world.querySelector('#interactionPoint_ASSEMBLYTABLE_1') as GameEntity
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_1') as GameEntity,
+        AnimationConst.AssemblyTableAnimation1
       )
     );
     /** 注册组装台2 */
     this.addInteractive(
       InteractiveConst.AssemblyTable2,
       new AssemblyTable(
-        world.querySelector('#interactionPoint_ASSEMBLYTABLE_2') as GameEntity
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_2') as GameEntity,
+        AnimationConst.AssemblyTableAnimation2
       )
     );
     /** 注册组装台3 */
     this.addInteractive(
       InteractiveConst.AssemblyTable3,
       new AssemblyTable(
-        world.querySelector('#interactionPoint_ASSEMBLYTABLE_3') as GameEntity
+        world.querySelector('#interactionPoint_ASSEMBLYTABLE_3') as GameEntity,
+        AnimationConst.AssemblyTableAnimation3
       )
     );
 
