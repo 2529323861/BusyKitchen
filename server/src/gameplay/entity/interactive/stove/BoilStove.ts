@@ -74,7 +74,7 @@ export class BoilStove extends Stove {
             /** 给予玩家锅灰 */
             PlayerSlotMgr.instance.setPlayerSlot(
               entity.player.userId,
-              JsonDataMgr.instance.getDateFromItemMap('1013')
+              JsonDataMgr.instance.getDateFromItemMap('1014')
             );
             this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
             console.log('(server): 玩家将锅灰从烧糊锅炉中取出');
