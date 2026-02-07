@@ -3,6 +3,7 @@ import { AnimationConst } from '../const/AnimationConst';
 import { AssemblyTableAnimation } from '../entity/AnimationEntity/AssemblyTableAnimation';
 import type { BaseAnimationEntity } from '../entity/AnimationEntity/BaseAnimationEntity';
 import { CuttingBoardAnimation } from '../entity/AnimationEntity/CuttingBoardAnimation';
+import { StoveProgressbarAnimation } from '../entity/AnimationEntity/StoveProgressbarAnimation';
 import type { BaseClickable } from '../entity/clickable/BaseClickable';
 
 export class AnimationMgr extends Singleton<AnimationMgr>() {
@@ -51,6 +52,26 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
     this.addAnimation(
       AnimationConst.AssemblyTableAnimation3,
       new AssemblyTableAnimation(new GameVector3(49, 9, 36))
+    );
+    /** 注册一号灶台进度动画 */
+    this.addAnimation(
+      AnimationConst.StoveProgressbarAnimation1,
+      new StoveProgressbarAnimation(new GameVector3(43, 10, 41))
+    );
+    /** 注册二号灶台进度动画 */
+    this.addAnimation(
+      AnimationConst.StoveProgressbarAnimation2,
+      new StoveProgressbarAnimation(new GameVector3(44, 10, 41))
+    );
+    /** 注册三号灶台进度动画 */
+    this.addAnimation(
+      AnimationConst.StoveProgressbarAnimation3,
+      new StoveProgressbarAnimation(new GameVector3(46, 10, 41))
+    );
+    /** 注册四号灶台进度动画 */
+    this.addAnimation(
+      AnimationConst.StoveProgressbarAnimation4,
+      new StoveProgressbarAnimation(new GameVector3(47, 10, 41))
     );
     /** 传递初始化 */
     this._animationMap.forEach((value) => {

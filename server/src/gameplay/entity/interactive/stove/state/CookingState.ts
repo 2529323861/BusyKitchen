@@ -1,5 +1,7 @@
 import type { IState } from '../../../../../framework/common/StateMachine';
 import { StoveState } from '../../../../const/stateConst';
+import { AnimationMgr } from '../../../../mgr/AnimationMgr';
+import type { StoveProgressbarAnimation } from '../../../AnimationEntity/StoveProgressbarAnimation';
 import type { Stove } from '../Stove';
 
 export class CookingState implements IState {
@@ -14,6 +16,12 @@ export class CookingState implements IState {
     this._interactive = controller;
   }
   onEnter(prevState: string): void {
+    /** 进度条动画切换 */
+    (
+      AnimationMgr.instance.getAnimation(
+        this._interactive._stoveProgressAnimationToken
+      ) as StoveProgressbarAnimation
+    )?.changeTo(this.name as StoveState);
     console.log('(server): 开始烹饪');
     this._timer = this.COOKINGTIME;
   }

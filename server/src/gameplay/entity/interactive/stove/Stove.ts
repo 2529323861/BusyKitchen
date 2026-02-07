@@ -13,11 +13,14 @@ import { CookingState } from './state/CookingState';
 import { StoveIdleState } from './state/StoveIdleState';
 
 export class Stove extends BaseInteractive {
+  public readonly _stoveProgressAnimationToken: string;
+
   protected storageItem: IItemData =
     JsonDataMgr.instance.getDateFromItemMap('1000');
 
-  constructor(entity: GameEntity) {
+  constructor(entity: GameEntity, stoveProgressAnimationToken: string) {
     super(entity);
+    this._stoveProgressAnimationToken = stoveProgressAnimationToken;
   }
 
   public init(): void {
@@ -61,5 +64,6 @@ export class Stove extends BaseInteractive {
   }
   public update(delta: number): void {
     this._stateMachine?.update(delta);
+    this._stateMachine?.getCurrentStateName();
   }
 }

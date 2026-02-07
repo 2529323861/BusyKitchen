@@ -101,28 +101,32 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     this.addInteractive(
       InteractiveConst.FryStove1,
       new FryStove(
-        world.querySelector('#interactionPoint_STOVE_1') as GameEntity
+        world.querySelector('#interactionPoint_STOVE_1') as GameEntity,
+        AnimationConst.StoveProgressbarAnimation1
       )
     );
     /** 注册2号煎锅 */
     this.addInteractive(
       InteractiveConst.FryStove2,
       new FryStove(
-        world.querySelector('#interactionPoint_STOVE_2') as GameEntity
+        world.querySelector('#interactionPoint_STOVE_2') as GameEntity,
+        AnimationConst.StoveProgressbarAnimation2
       )
     );
     /** 注册1号锅炉 */
     this.addInteractive(
       InteractiveConst.BoilStove1,
       new BoilStove(
-        world.querySelector('#interactionPoint_STOVE_3') as GameEntity
+        world.querySelector('#interactionPoint_STOVE_3') as GameEntity,
+        AnimationConst.StoveProgressbarAnimation3
       )
     );
     /** 注册2号锅炉 */
     this.addInteractive(
       InteractiveConst.BoilStove2,
       new BoilStove(
-        world.querySelector('#interactionPoint_STOVE_4') as GameEntity
+        world.querySelector('#interactionPoint_STOVE_4') as GameEntity,
+        AnimationConst.StoveProgressbarAnimation4
       )
     );
     /** 注册垃圾桶 */

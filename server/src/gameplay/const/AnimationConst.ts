@@ -15,4 +15,12 @@ export const enum AnimationConst {
   AssemblyTableAnimation2 = 'AssemblyTableAnimation2',
   /** 组装台动画3 */
   AssemblyTableAnimation3 = 'AssemblyTableAnimation3',
+  /** 灶台烹饪进度动画1 */
+  StoveProgressbarAnimation1 = 'StoveProgressbarAnimation1',
+  /** 灶台烹饪进度动画2 */
+  StoveProgressbarAnimation2 = 'StoveProgressbarAnimation2',
+  /** 灶台烹饪进度动画3 */
+  StoveProgressbarAnimation3 = 'StoveProgressbarAnimation3',
+  /** 灶台烹饪进度动画4 */
+  StoveProgressbarAnimation4 = 'StoveProgressbarAnimation4',
 }
