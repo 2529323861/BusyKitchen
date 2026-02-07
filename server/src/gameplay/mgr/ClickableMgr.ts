@@ -4,6 +4,7 @@ import { InteractiveConst } from '../const/interactiveConst';
 import { AssemblyTableClicker } from '../entity/clickable/AssemblyTableClicker';
 import type { BaseClickable } from '../entity/clickable/BaseClickable';
 import { CuttingBoardClicker } from '../entity/clickable/CuttingBoardClicker';
+import { DustbinClicker } from '../entity/clickable/DustbinClicker';
 import { ItemSourceClicker } from '../entity/clickable/ItemSourceClicker';
 import type { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
@@ -118,6 +119,14 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       new ItemSourceClicker(
         world.querySelector('#clickPoint_ITEMSOURCE_TOMATO') as GameEntity,
         InteractiveConst.TomatoSource
+      )
+    );
+    /** 注册垃圾桶点击点 */
+    this.addClickable(
+      ClickableConst.Dustbin,
+      new DustbinClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_DUSTBIN') as GameEntity,
+        InteractiveConst.Dustbin
       )
     );
 

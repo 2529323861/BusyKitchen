@@ -25,4 +25,6 @@ export const enum ClickableConst {
   BeefSource = 'BeefSource',
   /** 无限生菜源 */
   LettuceSource = 'LettuceSource',
+  /** 垃圾桶 */
+  Dustbin = 'Dustbin',
 }
