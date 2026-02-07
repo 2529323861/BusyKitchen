@@ -4,6 +4,7 @@ import { InteractiveConst } from '../const/interactiveConst';
 import { AssemblyTableClicker } from '../entity/clickable/AssemblyTableClicker';
 import type { BaseClickable } from '../entity/clickable/BaseClickable';
 import { CuttingBoardClicker } from '../entity/clickable/CuttingBoardClicker';
+import { ItemSourceClicker } from '../entity/clickable/ItemSourceClicker';
 import type { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { InteractiveMgr } from './InteractiveMgr';
@@ -79,6 +80,47 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
         InteractiveConst.AssemblyTable3
       )
     );
+    /** 注册无限盘子源点击点 */
+    this.addClickable(
+      ClickableConst.PlateSource,
+      new ItemSourceClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_PLATE') as GameEntity,
+        InteractiveConst.PlateSource
+      )
+    );
+    /** 注册无限生菜源点击点 */
+    this.addClickable(
+      ClickableConst.LettuceSource,
+      new ItemSourceClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_LETTUCE') as GameEntity,
+        InteractiveConst.LettuceSource
+      )
+    );
+    /** 注册无限牛排源点击点 */
+    this.addClickable(
+      ClickableConst.BeefSource,
+      new ItemSourceClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_BEEF') as GameEntity,
+        InteractiveConst.BeefSource
+      )
+    );
+    /** 注册无限面包源点击点 */
+    this.addClickable(
+      ClickableConst.BreadSource,
+      new ItemSourceClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_BREAD') as GameEntity,
+        InteractiveConst.BreadSource
+      )
+    );
+    /** 注册无限番茄源点击点 */
+    this.addClickable(
+      ClickableConst.TomatoSource,
+      new ItemSourceClicker(
+        world.querySelector('#clickPoint_ITEMSOURCE_TOMATO') as GameEntity,
+        InteractiveConst.TomatoSource
+      )
+    );
+
     /** 传递初始化 */
     this._clickableMap.forEach((value) => {
       value.init();
