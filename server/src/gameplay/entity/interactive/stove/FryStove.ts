@@ -7,11 +7,11 @@ import { Stove } from './Stove';
 export class FryStove extends Stove {
   public bindevent(): void {
     this._entity.onInteract(({ entity }) => {
-      this.interactiveCallback(entity);
+      this.interactCallback(entity);
     });
   }
   /** 交互回调封装 */
-  public interactiveCallback(entity: GamePlayerEntity): void {
+  public interactCallback(entity: GamePlayerEntity): void {
     const state = this._stateMachine?.getCurrentStateName();
     switch (state) {
       case StoveState.StoveIdleState: {
