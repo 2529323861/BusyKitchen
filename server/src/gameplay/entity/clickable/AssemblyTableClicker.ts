@@ -13,12 +13,28 @@ export class AssemblyTableClicker extends BaseClickable {
     this.bindevent();
   }
   public bindevent(): void {
-    this._entity.onClick(() => {
-      (
-        InteractiveMgr.instance.getInteractive(
-          this._assemblyTableToken
-        ) as AssemblyTable
-      ).assemble();
+    this._entity.onClick(({ button, clicker }) => {
+      switch (button) {
+        case GameButtonType.ACTION0: {
+          (
+            InteractiveMgr.instance.getInteractive(
+              this._assemblyTableToken
+            ) as AssemblyTable
+          ).assemble();
+          break;
+        }
+        case GameButtonType.ACTION1: {
+          (
+            InteractiveMgr.instance.getInteractive(
+              this._assemblyTableToken
+            ) as AssemblyTable
+          ).interactCallback(clicker);
+          break;
+        }
+        default: {
+          break;
+        }
+      }
     });
   }
 }

@@ -13,12 +13,28 @@ export class CuttingBoardClicker extends BaseClickable {
     this.bindevent();
   }
   public bindevent(): void {
-    this._entity.onClick(() => {
-      (
-        InteractiveMgr.instance.getInteractive(
-          this._cuttingboardToken
-        ) as CuttingBoard
-      ).click();
+    this._entity.onClick(({ button, clicker }) => {
+      switch (button) {
+        case GameButtonType.ACTION0: {
+          (
+            InteractiveMgr.instance.getInteractive(
+              this._cuttingboardToken
+            ) as CuttingBoard
+          ).click();
+          break;
+        }
+        case GameButtonType.ACTION1: {
+          (
+            InteractiveMgr.instance.getInteractive(
+              this._cuttingboardToken
+            ) as CuttingBoard
+          ).interactCallBack(clicker);
+          break;
+        }
+        default: {
+          break;
+        }
+      }
     });
   }
 }
