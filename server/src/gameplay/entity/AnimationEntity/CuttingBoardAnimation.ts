@@ -9,11 +9,11 @@ export class CuttingBoardAnimation extends BaseAnimationEntity {
 
   constructor(pos: GameVector3) {
     super();
-    this._pos = pos;
+    this._pos = pos.add(new GameVector3(0.5, 1.04, 0.5));
   }
   public init(): void {
     this._AnimationEntity = world.createEntity({
-      position: this._pos.add(new GameVector3(0.5, 1.04, 0.5)),
+      position: this._pos,
       collides: false,
       mesh: 'mesh/default.vb',
       meshScale: new GameVector3(0.2 / 16, 0.2 / 16, 0.2 / 16),
