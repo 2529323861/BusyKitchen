@@ -57,4 +57,7 @@ export class StoveProgressbarAnimation extends BaseAnimationEntity {
       }
     }
   }
+  public destroy(): void {
+    this._entity?.destroy();
+  }
 }
