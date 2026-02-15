@@ -73,25 +73,25 @@ export class OrderEntry extends BaseUIComponent {
             this._destinationPos.x;
         }
       }
-      /** y使用线性移动 */
+      /** y使用非线性移动 */
       if (
         this._destinationPos.y !==
         (this._orderEntry as UiImage).position.offset.y
       ) {
-        /** 线性系数 */
-        const factor = 8;
+        /** 非线性系数 */
+        const factor = 0.5;
+        /** 坐标不相等 */
         if (
           Math.abs(
             this._destinationPos.y -
               (this._orderEntry as UiImage).position.offset.y
-          ) >= factor
+          ) >= 1
         ) {
-          /** 向目标方向移动 */
+          /** 坐标差大于1 */
           (this._orderEntry as UiImage).position.offset.y +=
-            this._destinationPos.y >
-            (this._orderEntry as UiImage).position.offset.y
-              ? factor
-              : -factor;
+            (this._destinationPos.y -
+              (this._orderEntry as UiImage).position.offset.y) *
+            factor;
         } else {
           /** 坐标差较小，直接复位 */
           (this._orderEntry as UiImage).position.offset.y =
@@ -109,17 +109,20 @@ export class OrderEntry extends BaseUIComponent {
 
       /** 如果处于删除状态，则持续缩小高度 */
       if (this._state === EntryState.Deleting) {
-        if ((this._orderEntry as UiImage).size.offset.y !== 0) {
-          /** 减少系数 */
-          const factor = 8;
-          if ((this._orderEntry as UiImage).size.offset.y > factor) {
-            (this._orderEntry as UiImage).size.offset.y -= factor;
+        if (0 !== (this._orderEntry as UiImage).size.offset.y) {
+          /** 非线性系数 */
+          const factor = 0.5;
+          /** 高度不相等 */
+          if (Math.abs(0 - (this._orderEntry as UiImage).size.offset.y) >= 1) {
+            /** 高度差大于1 */
+            (this._orderEntry as UiImage).size.offset.y +=
+              (0 - (this._orderEntry as UiImage).size.offset.y) * factor;
           } else {
+            /** 高度差较小，直接复位 */
             (this._orderEntry as UiImage).size.offset.y = 0;
+            this._state = EntryState.Destoried;
+            this.destory();
           }
-        } else {
-          this._state = EntryState.Destoried;
-          this.destory();
         }
       }
     }
@@ -131,6 +134,8 @@ export class OrderEntry extends BaseUIComponent {
 
   public delelete(): void {
     this._state = EntryState.Deleting;
+    (this._orderEntry.findChildByName('time') as UiText).visible = false;
+    (this._orderEntry.findChildByName('name') as UiText).visible = false;
   }
   get state() {
     return this._state;

@@ -102,6 +102,7 @@ export class MessageEntry extends BaseUIComponent {
 
   public delete() {
     this._state = MessageEntryState.Deleting;
+    (this.messageEntry.findChildByName('message') as UiText).textContent = '';
   }
   public moveUpward() {
     this._destinationPos.y -= 45;
