@@ -28,7 +28,6 @@ export class BaseLogicScreen {
     });
   }
   public update(delta: number): void {
-    console.log('(client): GameLogicScreen update');
     this._componentMap.forEach((value) => {
       value.update(delta);
     });
