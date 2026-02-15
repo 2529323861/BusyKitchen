@@ -39,12 +39,15 @@ export class UIMgr extends Singleton<UIMgr>() {
       value.destory();
     });
   }
+  /** 使用token注册屏幕 */
   public addScreen(token: string, screen: BaseLogicScreen): void {
     this._screenMap.set(token, screen);
   }
+  /** 使用token移除屏幕 */
   public removeScreen(token: string): void {
     this._screenMap.delete(token);
   }
+  /** 使用token获取屏幕 */
   public getScreen(token: string): BaseLogicScreen | undefined {
     return this._screenMap.get(token);
   }

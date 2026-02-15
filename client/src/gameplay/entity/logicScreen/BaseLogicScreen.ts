@@ -47,9 +47,11 @@ export class BaseLogicScreen {
       value.start();
     });
   }
+  /** 显示屏幕 */
   public show(): void {
     this._uiScreen.visible = true;
   }
+  /** 隐藏屏幕 */
   public hide(): void {
     this._uiScreen.visible = false;
   }
