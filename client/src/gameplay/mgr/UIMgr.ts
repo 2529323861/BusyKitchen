@@ -1,18 +1,21 @@
 import { Singleton } from '../../framework/Singleton';
 import { LogicScreenToken } from '../const/LogicScreenConst';
 import type { BaseLogicScreen } from '../entity/logicScreen/BaseLogicScreen';
+import { CommonLogicScreen } from '../entity/logicScreen/CommonLogicScreen';
 import { GamingLogicScreen } from '../entity/logicScreen/GamingLogicScreen';
 
 export class UIMgr extends Singleton<UIMgr>() {
   private _screenMap: Map<string, BaseLogicScreen> = new Map();
+
   constructor() {
     super();
   }
+
   public init(): void {
     /** 注册通用屏幕 */
     this.addScreen(
       LogicScreenToken.CommonScreen,
-      new GamingLogicScreen(
+      new CommonLogicScreen(
         UiScreen.getAllScreen().filter((screen) => {
           return screen.name === 'common';
         })[0]
@@ -32,21 +35,25 @@ export class UIMgr extends Singleton<UIMgr>() {
       value.init();
     });
   }
+
   public start(): void {
     (
       this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
     ).show();
+
     this._screenMap.forEach((value) => {
       value.start();
     });
   }
+
   public update(delta: number): void {
-    this._screenMap.forEach((value) => {
+    this._screenMap.forEach((value, index) => {
       if (value.enableUpdate) {
         value.update(delta);
       }
     });
   }
+
   public destory(): void {
     this._screenMap.forEach((value) => {
       value.destory();
