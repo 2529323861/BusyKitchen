@@ -93,7 +93,7 @@ export class GamingLogicScreen extends BaseLogicScreen {
   public update(delta: number): void {
     super.update(delta);
   }
-  public destory(): void {
-    super.destory();
+  public destroy(): void {
+    super.destroy();
   }
 }

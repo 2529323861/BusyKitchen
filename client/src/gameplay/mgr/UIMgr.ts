@@ -54,9 +54,9 @@ export class UIMgr extends Singleton<UIMgr>() {
     });
   }
 
-  public destory(): void {
+  public destroy(): void {
     this._screenMap.forEach((value) => {
-      value.destory();
+      value.destroy();
     });
   }
   /** 使用token注册屏幕 */

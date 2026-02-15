@@ -4,7 +4,7 @@ import type { EntryConfig } from './OrderList';
 export const enum EntryState {
   Normal = 'Normal',
   Deleting = 'Deleting',
-  Destoried = 'Destoried',
+  Destroyed = 'Destroyed',
 }
 
 export class OrderEntry extends BaseUIComponent {
@@ -47,7 +47,7 @@ export class OrderEntry extends BaseUIComponent {
   }
   public update(delta: number): void {
     /** 如果未销毁 */
-    if (this._state !== EntryState.Destoried) {
+    if (this._state !== EntryState.Destroyed) {
       /** x使用非线性移动 */
       if (
         this._destinationPos.x !==
@@ -120,8 +120,8 @@ export class OrderEntry extends BaseUIComponent {
           } else {
             /** 高度差较小，直接复位 */
             (this._orderEntry as UiImage).size.offset.y = 0;
-            this._state = EntryState.Destoried;
-            this.destory();
+            this._state = EntryState.Destroyed;
+            this.destroy();
           }
         }
       }
@@ -141,7 +141,7 @@ export class OrderEntry extends BaseUIComponent {
     return this._state;
   }
 
-  public destory(): void {
+  public destroy(): void {
     this._orderEntry.parent = undefined;
   }
 }

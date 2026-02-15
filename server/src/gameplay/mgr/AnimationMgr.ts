@@ -96,7 +96,7 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
 
   public start(): void {}
   public update(delta: number): void {}
-  public destory(): void {
+  public destroy(): void {
     /** 传递销毁 */
     this._animationMap.forEach((value) => {
       value.destroy();

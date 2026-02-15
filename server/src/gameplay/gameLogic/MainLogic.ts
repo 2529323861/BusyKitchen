@@ -52,5 +52,5 @@ export class MainLogic extends BaseLogic {
     this.stateMachine!.update(delta);
   }
 
-  public destory(): void {}
+  public destroy(): void {}
 }

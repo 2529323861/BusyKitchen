@@ -216,7 +216,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
   /** 传递销毁 */
   public destroy(): void {
     this._interactiveMap.forEach((value) => {
-      value.destory();
+      value.destroy();
     });
   }
 }

@@ -88,7 +88,7 @@ export class MessageEntry extends BaseUIComponent {
           /** 高度差较小，直接复位 */
           (this.messageEntry as UiImage).size.offset.y = 0;
           this._state = MessageEntryState.Destroied;
-          this.destory();
+          this.destroy();
         }
       }
     }
@@ -110,7 +110,7 @@ export class MessageEntry extends BaseUIComponent {
   get state() {
     return this._state;
   }
-  public destory(): void {
+  public destroy(): void {
     this.messageEntry.parent = undefined;
   }
 }

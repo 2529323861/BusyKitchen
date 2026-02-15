@@ -46,14 +46,14 @@ export class OrderList extends BaseUIComponent {
     });
     /** 移除维护所有已经完成删除动画的节点 */
     this.orderEntryListDeleted = this.orderEntryListDeleted.filter((value) => {
-      return value.state !== EntryState.Destoried;
+      return value.state !== EntryState.Destroyed;
     });
   }
 
-  public destory(): void {
-    console.log('OrderList destory');
+  public destroy(): void {
+    console.log('OrderList destroy');
     this.orderEntryList.forEach((value) => {
-      value.destory();
+      value.destroy();
     });
   }
 

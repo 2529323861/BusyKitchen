@@ -20,5 +20,5 @@ export class BaseClickable {
   public update(delta: number): void {}
 
   /** 销毁接口 */
-  public destory(): void {}
+  public destroy(): void {}
 }

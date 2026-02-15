@@ -40,8 +40,8 @@ export default class clientApp extends Singleton<clientApp>() {
   public update(delta: number): void {
     UIMgr.instance.update(delta);
   }
-  public destory(): void {
-    UIMgr.instance.destory();
+  public destroy(): void {
+    UIMgr.instance.destroy();
     /** 停止更新间隔 */
     if (this._updateInterval) {
       clearInterval(this._updateInterval);

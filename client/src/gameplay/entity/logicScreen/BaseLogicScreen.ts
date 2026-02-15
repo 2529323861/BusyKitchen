@@ -41,7 +41,7 @@ export class BaseLogicScreen {
       value.update(delta);
     });
   }
-  public destory(): void {
+  public destroy(): void {
     console.log('(client): GameLogicScreen start');
     this._componentMap.forEach((value) => {
       value.start();

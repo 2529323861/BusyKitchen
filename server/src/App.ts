@@ -73,14 +73,14 @@ export class App extends Singleton<App>() {
   /** 传递销毁 */
   private destroy(): void {
     GameLogicMgr.instance.destroy();
-    ClickableMgr.instance.destory();
+    ClickableMgr.instance.destroy();
     InteractiveMgr.instance.destroy();
     PlayerEntityMgr.instance.destroy();
-    PlayerSlotMgr.instance.destory();
-    AnimationMgr.instance.destory();
+    PlayerSlotMgr.instance.destroy();
+    AnimationMgr.instance.destroy();
 
     /** 数据最后销毁 */
-    JsonDataMgr.instance.destory();
+    JsonDataMgr.instance.destroy();
     /** 停止更新间隔 */
     if (this._updateInterval) {
       clearInterval(this._updateInterval);
