@@ -9,6 +9,16 @@ export class UIMgr extends Singleton<UIMgr>() {
     super();
   }
   public init(): void {
+    /** 注册通用屏幕 */
+    this.addScreen(
+      LogicScreenToken.CommonScreen,
+      new GamingLogicScreen(
+        UiScreen.getAllScreen().filter((screen) => {
+          return screen.name === 'common';
+        })[0]
+      )
+    );
+    /** 注册游戏屏幕 */
     this.addScreen(
       LogicScreenToken.GamingLogicScreen,
       new GamingLogicScreen(
@@ -23,6 +33,9 @@ export class UIMgr extends Singleton<UIMgr>() {
     });
   }
   public start(): void {
+    (
+      this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
+    ).show();
     this._screenMap.forEach((value) => {
       value.start();
     });
