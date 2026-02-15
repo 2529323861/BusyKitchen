@@ -89,4 +89,8 @@ export class OrderList extends BaseUIComponent {
       value.changeIndex(idx);
     });
   }
+
+  get orderListLength() {
+    return this.orderEntryList.length;
+  }
 }
