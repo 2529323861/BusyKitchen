@@ -3,7 +3,16 @@ import type { BaseUIComponent } from '../UIComponent/BaseUIComponent';
 export class BaseLogicScreen {
   /** 屏幕内组件 */
   protected _componentMap: Map<string, BaseUIComponent> = new Map();
-  constructor() {}
+
+  /** 绑定的屏幕 */
+  protected _uiScreen: UiScreen;
+
+  /** 屏幕是否传递更新, 可读可改 */
+  public enableUpdate: boolean = true;
+
+  constructor(uiScreen: UiScreen) {
+    this._uiScreen = uiScreen;
+  }
   public init(): void {
     this._componentMap.forEach((value) => {
       value.init();
@@ -37,5 +46,11 @@ export class BaseLogicScreen {
     this._componentMap.forEach((value) => {
       value.start();
     });
+  }
+  public show(): void {
+    this._uiScreen.visible = true;
+  }
+  public hide(): void {
+    this._uiScreen.visible = false;
   }
 }

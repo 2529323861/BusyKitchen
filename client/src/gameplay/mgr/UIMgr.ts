@@ -9,10 +9,15 @@ export class UIMgr extends Singleton<UIMgr>() {
     super();
   }
   public init(): void {
-    this._screenMap.set(
+    this.addScreen(
       LogicScreenToken.GamingLogicScreen,
-      new GamingLogicScreen()
+      new GamingLogicScreen(
+        UiScreen.getAllScreen().filter((screen) => {
+          return screen.name === 'gaming';
+        })[0]
+      )
     );
+
     this._screenMap.forEach((value) => {
       value.init();
     });
@@ -24,12 +29,23 @@ export class UIMgr extends Singleton<UIMgr>() {
   }
   public update(delta: number): void {
     this._screenMap.forEach((value) => {
-      value.update(delta);
+      if (value.enableUpdate) {
+        value.update(delta);
+      }
     });
   }
   public destory(): void {
     this._screenMap.forEach((value) => {
       value.destory();
     });
+  }
+  public addScreen(token: string, screen: BaseLogicScreen): void {
+    this._screenMap.set(token, screen);
+  }
+  public removeScreen(token: string): void {
+    this._screenMap.delete(token);
+  }
+  public getScreen(token: string): BaseLogicScreen | undefined {
+    return this._screenMap.get(token);
   }
 }

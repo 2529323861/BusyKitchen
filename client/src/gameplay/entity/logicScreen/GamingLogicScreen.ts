@@ -4,25 +4,25 @@ import { OrderList } from '../UIComponent/OrderList/OrderList';
 import { BaseLogicScreen } from './BaseLogicScreen';
 
 export class GamingLogicScreen extends BaseLogicScreen {
-  private _screen: UiIndex_gaming;
-  constructor() {
-    super();
-    this._screen = new UiIndex_gaming(
-      UiScreen.getAllScreen().filter((screen) => {
-        return screen.name === 'gaming';
-      })[0]
-    );
+  /** 节点索引 */
+  private _UIIndex: UiIndex_gaming;
+
+  constructor(uiScreen: UiScreen) {
+    super(uiScreen);
+    this._UIIndex = new UiIndex_gaming(uiScreen);
   }
+
   public init(): void {
     console.log('(client): GameLogicScreen init');
     /** 注册订单列表 */
     this.addComponent(
       GamingLogicScreenComponentToken.OrderList,
-      new OrderList(this._screen.uiBox_orderList)
+      new OrderList(this._UIIndex.uiBox_orderList)
     );
 
     super.init();
   }
+
   public start(): void {
     console.log('(client): GameLogicScreen start');
     super.start();
