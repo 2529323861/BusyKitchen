@@ -3,6 +3,8 @@ import { LogicScreenToken } from '../const/LogicScreenConst';
 import type { BaseLogicScreen } from '../entity/logicScreen/BaseLogicScreen';
 import { CommonLogicScreen } from '../entity/logicScreen/CommonLogicScreen';
 import { GamingLogicScreen } from '../entity/logicScreen/GamingLogicScreen';
+import { SettlementLogicScreen } from '../entity/logicScreen/SettlementLogicScreen';
+import { WaitingLogicScreen } from '../entity/logicScreen/WaitingLogicScreen';
 
 export class UIMgr extends Singleton<UIMgr>() {
   private _screenMap: Map<string, BaseLogicScreen> = new Map();
@@ -30,6 +32,24 @@ export class UIMgr extends Singleton<UIMgr>() {
         })[0]
       )
     );
+    /** 注册等待屏幕 */
+    this.addScreen(
+      LogicScreenToken.WaitingScreen,
+      new WaitingLogicScreen(
+        UiScreen.getAllScreen().filter((screen) => {
+          return screen.name === 'waiting';
+        })[0]
+      )
+    );
+    /** 注册结算屏幕 */
+    this.addScreen(
+      LogicScreenToken.SettlementScreen,
+      new SettlementLogicScreen(
+        UiScreen.getAllScreen().filter((screen) => {
+          return screen.name === 'settlement';
+        })[0]
+      )
+    );
 
     this._screenMap.forEach((value) => {
       value.init();
@@ -37,6 +57,9 @@ export class UIMgr extends Singleton<UIMgr>() {
   }
 
   public start(): void {
+    (
+      this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
+    ).enableUpdate = true;
     (
       this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
     ).show();

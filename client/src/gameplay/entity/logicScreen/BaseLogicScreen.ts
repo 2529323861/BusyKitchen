@@ -8,7 +8,7 @@ export class BaseLogicScreen {
   protected _uiScreen: UiScreen;
 
   /** 屏幕是否传递更新, 可读可改 */
-  public enableUpdate: boolean = true;
+  public enableUpdate: boolean = false;
 
   constructor(uiScreen: UiScreen) {
     this._uiScreen = uiScreen;
