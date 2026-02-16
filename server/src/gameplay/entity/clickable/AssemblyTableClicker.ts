@@ -20,7 +20,7 @@ export class AssemblyTableClicker extends BaseClickable {
             InteractiveMgr.instance.getInteractive(
               this._assemblyTableToken
             ) as AssemblyTable
-          ).assemble();
+          ).assemble(clicker);
           break;
         }
         case GameButtonType.ACTION1: {

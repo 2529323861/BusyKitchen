@@ -14,25 +14,7 @@ export class CommunicationMgr extends Singleton<CommunicationMgr>() {
     /** 初始化监听 */
     this.initializeReceiver();
   }
-  public start(): void {
-    /** 测试代码 */
-    setTimeout(() => {
-      this.sendBroad({
-        token: CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-        payload: '广播提示: 双端通讯成功打通！',
-      });
-    }, 1000);
-    setTimeout(() => {
-      this.sendBroad({
-        token: CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-        payload: '这是同时发送的广播-1',
-      });
-      this.sendBroad({
-        token: CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-        payload: '这是同时发送的广播-2',
-      });
-    }, 2000);
-  }
+  public start(): void {}
   public update(delta: number): void {}
   public destroy(): void {}
 

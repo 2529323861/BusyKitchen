@@ -1,6 +1,9 @@
+import { CommunicationConst } from '../../../../../shares/communicationConst';
 import type { IItemData } from '../../jsonData/DataInterface';
 import { AnimationMgr } from '../../mgr/AnimationMgr';
+import { CommunicationMgr } from '../../mgr/CommunicationMgr';
 import { JsonDataMgr } from '../../mgr/JsonDataMgr';
+import { PlayerEntityMgr } from '../../mgr/PlayerEntityMgr';
 import { PlayerSlotMgr } from '../../mgr/PlayerSlotMgr';
 import type { AssemblyTableAnimation } from '../AnimationEntity/AssemblyTableAnimation';
 import { BaseInteractive } from './BaseInteractive';
@@ -74,7 +77,7 @@ export class AssemblyTable extends BaseInteractive {
       }
     }
   }
-  public assemble(): void {
+  public assemble(entity: GamePlayerEntity): void {
     /** 获取组装台动画用实体 */
     const animation = AnimationMgr.instance.getAnimation(
       this._animationToken
@@ -102,6 +105,16 @@ export class AssemblyTable extends BaseInteractive {
     } else {
       /** 配方不存在 */
       console.log('(server): 玩家合成失败，不存在的配方');
+      CommunicationMgr.instance.sendTo(
+        PlayerEntityMgr.instance.getPlayerEntity(
+          entity.player.userId
+        ) as GamePlayerEntity,
+        {
+          token:
+            CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+          payload: `这个配方不存在`,
+        }
+      );
     }
   }
 }

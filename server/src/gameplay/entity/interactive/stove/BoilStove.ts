@@ -1,6 +1,9 @@
+import { CommunicationConst } from '../../../../../../shares/communicationConst';
 import { StoveState } from '../../../const/stateConst';
 import type { IFryTableData } from '../../../jsonData/DataInterface';
+import { CommunicationMgr } from '../../../mgr/CommunicationMgr';
 import { JsonDataMgr } from '../../../mgr/JsonDataMgr';
+import { PlayerEntityMgr } from '../../../mgr/PlayerEntityMgr';
 import { PlayerSlotMgr } from '../../../mgr/PlayerSlotMgr';
 import { Stove } from './Stove';
 
@@ -29,9 +32,31 @@ export class BoilStove extends Stove {
             JsonDataMgr.instance.getDateFromItemMap('1000')
           );
           /** 状态切换蒸煮中 */
+          /** 发送客户端提示 */
+          CommunicationMgr.instance.sendTo(
+            PlayerEntityMgr.instance.getPlayerEntity(
+              entity.player.userId
+            ) as GamePlayerEntity,
+            {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `已启动锅炉`,
+            }
+          );
           console.log('(server): 玩家用可交互物品交互闲置锅炉');
           this._stateMachine!.transitionTo(StoveState.CookingState);
         } else {
+          /** 发送客户端提示 */
+          CommunicationMgr.instance.sendTo(
+            PlayerEntityMgr.instance.getPlayerEntity(
+              entity.player.userId
+            ) as GamePlayerEntity,
+            {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `这东西不能煮吧`,
+            }
+          );
           /** 玩家手中的东西不可以蒸煮 */
           console.log('(server): 玩家用不可交互物品交互闲置锅炉');
           /** 留空做UI通知 */
@@ -65,6 +90,16 @@ export class BoilStove extends Stove {
           /** 玩家手中不为空，不可取出物品 */
           console.log('(server): 玩家无法取出结束锅炉');
           /** 预留UI接口 */
+          CommunicationMgr.instance.sendTo(
+            PlayerEntityMgr.instance.getPlayerEntity(
+              entity.player.userId
+            ) as GamePlayerEntity,
+            {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `需要盘子才能取出产物`,
+            }
+          );
         }
         break;
       }
@@ -88,10 +123,30 @@ export class BoilStove extends Stove {
           /** 玩家手中不为空，不可取出物品 */
           console.log('(server): 玩家无法取出烧糊锅炉');
           /** 预留UI接口 */
+          CommunicationMgr.instance.sendTo(
+            PlayerEntityMgr.instance.getPlayerEntity(
+              entity.player.userId
+            ) as GamePlayerEntity,
+            {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `需要盘子才能取出产物`,
+            }
+          );
         }
         break;
       }
       default: {
+        CommunicationMgr.instance.sendTo(
+          PlayerEntityMgr.instance.getPlayerEntity(
+            entity.player.userId
+          ) as GamePlayerEntity,
+          {
+            token:
+              CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+            payload: `锅炉繁忙中，请稍后`,
+          }
+        );
         break;
       }
     }
