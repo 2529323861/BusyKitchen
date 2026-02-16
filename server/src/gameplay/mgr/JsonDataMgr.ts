@@ -5,12 +5,14 @@ import type {
   IBoilTableData,
   IFryTableData,
   IAssemblyFormulaData,
+  IOrdersData,
 } from '../jsonData/DataInterface';
 import { item } from '../jsonData/item.json';
 import { cuttingTable } from '../jsonData/cuttingTable.json';
 import { boilTable } from '../jsonData/BoilTable.json';
 import { fryTable } from '../jsonData/fryTable.json';
 import { AssemblyFormula } from '../jsonData/AssemblyFormula.json';
+import { orders } from '../jsonData/orders.json';
 
 export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   private _itemMap: Map<string, IItemData> = new Map();
@@ -18,6 +20,7 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   private _boilTableArray: Array<IBoilTableData> = [];
   private _fryTableArray: Array<IFryTableData> = [];
   private _assemblyFormula: Array<IAssemblyFormulaData> = [];
+  private _ordersDataArray: Array<IOrdersData> = [];
 
   constructor() {
     super();
@@ -46,6 +49,11 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
     /** 读取合成配方数据 */
     AssemblyFormula.forEach((value) => {
       this._assemblyFormula.push(value);
+    });
+
+    /** 读取合成配方数据 */
+    orders.forEach((value) => {
+      this._ordersDataArray.push(value);
     });
   }
 
@@ -90,6 +98,14 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
     /** 没能找到匹配的配方 */
     return undefined;
   }
+
+  public getRandomOrder(): IOrdersData {
+    const randomIndex = Math.floor(
+      Math.random() * this._ordersDataArray.length
+    );
+    return this._ordersDataArray[randomIndex];
+  }
+
   public start(): void {}
 
   public update(delta: number): void {}

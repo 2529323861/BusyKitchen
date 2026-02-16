@@ -24,3 +24,11 @@ export interface IAssemblyFormulaData {
   material: Array<string>;
   product: string;
 }
+
+export interface IOrdersData {
+  id: string;
+  item: string;
+  name: string;
+  img: string;
+  time: number;
+}
