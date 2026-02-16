@@ -37,5 +37,7 @@ export class PlayerEntityMgr extends Singleton<PlayerEntityMgr>() {
 
   public update(delta: number) {}
 
-  public destroy() {}
+  public destroy() {
+    PlayerEntityMgr.destroyInstance();
+  }
 }

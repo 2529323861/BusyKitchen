@@ -7,6 +7,8 @@ import { EventEmitter } from '../../framework/common/EventEmitter';
 import { Singleton } from '../../framework/common/Singleton';
 
 export class CommunicationMgr extends Singleton<CommunicationMgr>() {
+  /** 事件绑定token，用于取消事件 */
+  private bindeventToken: GameEventHandlerToken | undefined;
   constructor() {
     super();
   }
@@ -16,10 +18,14 @@ export class CommunicationMgr extends Singleton<CommunicationMgr>() {
   }
   public start(): void {}
   public update(delta: number): void {}
-  public destroy(): void {}
+  public destroy(): void {
+    /** 取消事件监听 */
+    this.bindeventToken?.cancel();
+    CommunicationMgr.destroyInstance();
+  }
 
   private initializeReceiver(): void {
-    remoteChannel.onServerEvent((event) => {
+    this.bindeventToken = remoteChannel.onServerEvent((event) => {
       const serverPayload: IServerPayload = {
         userId: event.entity.player.userId,
         payload: (event.args as ITransmitingMessage).payload,

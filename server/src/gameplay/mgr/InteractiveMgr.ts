@@ -218,5 +218,6 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     this._interactiveMap.forEach((value) => {
       value.destroy();
     });
+    InteractiveMgr.destroyInstance();
   }
 }

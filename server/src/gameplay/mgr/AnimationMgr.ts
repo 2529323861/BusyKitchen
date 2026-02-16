@@ -101,5 +101,6 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
     this._animationMap.forEach((value) => {
       value.destroy();
     });
+    AnimationMgr.destroyInstance();
   }
 }

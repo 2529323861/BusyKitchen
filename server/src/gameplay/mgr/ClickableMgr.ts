@@ -186,5 +186,7 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
 
   public start(): void {}
   public update(delta: number): void {}
-  public destroy(): void {}
+  public destroy(): void {
+    ClickableMgr.destroyInstance();
+  }
 }

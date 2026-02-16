@@ -81,5 +81,7 @@ export class PlayerSlotMgr extends Singleton<PlayerSlotMgr>() {
 
   public update(delta: number): void {}
 
-  public destroy(): void {}
+  public destroy(): void {
+    PlayerSlotMgr.destroyInstance();
+  }
 }

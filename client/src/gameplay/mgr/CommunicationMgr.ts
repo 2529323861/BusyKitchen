@@ -13,7 +13,9 @@ export class CommunicationMgr extends Singleton<CommunicationMgr>() {
   }
   public start(): void {}
   public update(delta: number): void {}
-  public destroy(): void {}
+  public destroy(): void {
+    CommunicationMgr.destroyInstance();
+  }
 
   private initializeReceiver(): void {
     remoteChannel.onClientEvent((event) => {

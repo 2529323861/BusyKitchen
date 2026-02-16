@@ -58,6 +58,7 @@ export class UIMgr extends Singleton<UIMgr>() {
     this._screenMap.forEach((value) => {
       value.destroy();
     });
+    UIMgr.destroyInstance();
   }
   /** 使用token注册屏幕 */
   public addScreen(token: string, screen: BaseLogicScreen): void {

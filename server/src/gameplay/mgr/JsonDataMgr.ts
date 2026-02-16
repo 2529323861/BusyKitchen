@@ -94,5 +94,7 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
 
   public update(delta: number): void {}
 
-  public destroy(): void {}
+  public destroy(): void {
+    JsonDataMgr.destroyInstance();
+  }
 }

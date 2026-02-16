@@ -39,15 +39,16 @@ export class GameLogicMgr extends Singleton<GameLogicMgr>() {
     this._gameLogicMap.forEach((value) => {
       value.destroy();
     });
+    GameLogicMgr.destroyInstance();
   }
 
-  private addGameLogic(logic: BaseLogic, token: string): void {
+  public addGameLogic(logic: BaseLogic, token: string): void {
     this._gameLogicMap.set(token, logic);
   }
-  private getGameLogic(token: string): void {
+  public getGameLogic(token: string): void {
     this._gameLogicMap.get(token);
   }
-  private removeGameLogic(token: string): void {
+  public removeGameLogic(token: string): void {
     this._gameLogicMap.delete(token);
   }
 }
