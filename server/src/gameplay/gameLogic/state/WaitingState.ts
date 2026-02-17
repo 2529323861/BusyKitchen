@@ -1,5 +1,8 @@
+import { CommunicationConst } from '../../../../../shares/communicationConst';
 import type { IState } from '../../../framework/common/StateMachine';
+import { LogicScreenToken } from '../../const/LogicScreenConst';
 import { GameplayState } from '../../const/stateConst';
+import { CommunicationMgr } from '../../mgr/CommunicationMgr';
 import type { BaseLogic } from '../BaseLogic';
 
 /** 游戏等待状态 */
@@ -23,6 +26,10 @@ export class WaitingState implements IState {
     console.log('(server): WaitingState onEnter');
     this._time = this._maxTime;
     this.lastTime = this._time;
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_ChangeScreen,
+      payload: LogicScreenToken.WaitingScreen,
+    });
   }
 
   public onUpdate(deltaTime: number): void {

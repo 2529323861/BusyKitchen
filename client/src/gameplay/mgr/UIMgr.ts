@@ -1,3 +1,5 @@
+import { CommunicationConst } from '../../../../shares/communicationConst';
+import { EventEmitter } from '../../framework/EventEmitter';
 import { Singleton } from '../../framework/Singleton';
 import { LogicScreenToken } from '../const/LogicScreenConst';
 import type { BaseLogicScreen } from '../entity/logicScreen/BaseLogicScreen';
@@ -51,18 +53,80 @@ export class UIMgr extends Singleton<UIMgr>() {
       )
     );
 
+    this.bindevent();
+
     this._screenMap.forEach((value) => {
       value.init();
+    });
+  }
+  private bindevent() {
+    EventEmitter.instance.on(CommunicationConst.UI_ChangeScreen, (payload) => {
+      /** 隐藏并停止更新所有屏幕 */
+      (
+        this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
+      ).enableUpdate = false;
+      (
+        this.getScreen(LogicScreenToken.WaitingScreen) as WaitingLogicScreen
+      ).enableUpdate = false;
+      (
+        this.getScreen(
+          LogicScreenToken.SettlementScreen
+        ) as SettlementLogicScreen
+      ).enableUpdate = false;
+      (
+        this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
+      ).hide();
+      (
+        this.getScreen(LogicScreenToken.WaitingScreen) as WaitingLogicScreen
+      ).hide();
+      (
+        this.getScreen(
+          LogicScreenToken.SettlementScreen
+        ) as SettlementLogicScreen
+      ).hide();
+      /** 显示并更新指定屏幕 */
+      switch (payload as LogicScreenToken) {
+        case LogicScreenToken.GamingLogicScreen:
+          (
+            this.getScreen(
+              LogicScreenToken.GamingLogicScreen
+            ) as GamingLogicScreen
+          ).enableUpdate = true;
+          (
+            this.getScreen(
+              LogicScreenToken.GamingLogicScreen
+            ) as GamingLogicScreen
+          ).show();
+          break;
+        case LogicScreenToken.WaitingScreen:
+          (
+            this.getScreen(LogicScreenToken.WaitingScreen) as WaitingLogicScreen
+          ).enableUpdate = true;
+          (
+            this.getScreen(LogicScreenToken.WaitingScreen) as WaitingLogicScreen
+          ).show();
+          break;
+        case LogicScreenToken.SettlementScreen:
+          (
+            this.getScreen(
+              LogicScreenToken.SettlementScreen
+            ) as SettlementLogicScreen
+          ).enableUpdate = true;
+          (
+            this.getScreen(
+              LogicScreenToken.SettlementScreen
+            ) as SettlementLogicScreen
+          ).show();
+          break;
+      }
     });
   }
 
   public start(): void {
     (
-      this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
+      this.getScreen(LogicScreenToken.CommonScreen) as CommonLogicScreen
     ).enableUpdate = true;
-    (
-      this.getScreen(LogicScreenToken.GamingLogicScreen) as GamingLogicScreen
-    ).show();
+    (this.getScreen(LogicScreenToken.CommonScreen) as CommonLogicScreen).show();
 
     this._screenMap.forEach((value) => {
       value.start();

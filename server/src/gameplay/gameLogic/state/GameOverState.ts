@@ -1,5 +1,8 @@
+import { CommunicationConst } from '../../../../../shares/communicationConst';
 import type { IState } from '../../../framework/common/StateMachine';
+import { LogicScreenToken } from '../../const/LogicScreenConst';
 import { GameplayState } from '../../const/stateConst';
+import { CommunicationMgr } from '../../mgr/CommunicationMgr';
 import type { BaseLogic } from '../BaseLogic';
 
 /** 游戏结算状态 */
@@ -15,6 +18,10 @@ export class GameOverState implements IState {
 
   public onEnter(): void {
     console.log('(server): GameOverState onEnter');
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_ChangeScreen,
+      payload: LogicScreenToken.SettlementScreen,
+    });
   }
 
   public onUpdate(deltaTime: number): void {}
