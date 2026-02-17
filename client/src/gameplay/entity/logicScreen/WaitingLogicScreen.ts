@@ -1,4 +1,6 @@
+import { CommunicationConst } from '../../../../../shares/communicationConst';
 import { UiIndex_waiting } from '../../../../UiIndex/screens/UiIndex_waiting';
+import { EventEmitter } from '../../../framework/EventEmitter';
 import { WaitingScreenComponentToken } from '../../const/UIComponentConst';
 import { CountDown } from '../UIComponent/CountDown';
 import { BaseLogicScreen } from './BaseLogicScreen';
@@ -18,5 +20,14 @@ export class WaitingLogicScreen extends BaseLogicScreen {
     this.bindevent();
   }
 
-  private bindevent(): void {}
+  private bindevent(): void {
+    EventEmitter.instance.on(
+      CommunicationConst.UI_Screen_WaitingScreen_CountDown_setTime,
+      (payload) => {
+        (
+          this.getComponent(WaitingScreenComponentToken.CountDown) as CountDown
+        ).setTime(payload);
+      }
+    );
+  }
 }

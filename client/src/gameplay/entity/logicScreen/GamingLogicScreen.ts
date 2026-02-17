@@ -32,7 +32,47 @@ export class GamingLogicScreen extends BaseLogicScreen {
     /** 绑定事件 */
     this.bindevent();
   }
-  private bindevent(): void {}
+  private bindevent(): void {
+    /** 设置得分 */
+    EventEmitter.instance.on(
+      CommunicationConst.UI_Screen_GamingLogicScreen_Score_changeScore,
+      (payload) => {
+        this.changeScore(payload as number);
+      }
+    );
+    /** 设置倒计时 */
+    EventEmitter.instance.on(
+      CommunicationConst.UI_Screen_GamingLogicScreen_CountDown_setTime,
+      (payload) => {
+        (
+          this.getComponent(
+            GamingLogicScreenComponentToken.CountDown
+          ) as CountDown
+        ).setTime(payload as number);
+      }
+    );
+    /** 新增订单条目 */
+    EventEmitter.instance.on(
+      CommunicationConst.UI_Screen_GamingLogicScreen_OrderList_addEntry,
+      (payload) => {
+        (
+          this.getComponent(
+            GamingLogicScreenComponentToken.OrderList
+          ) as OrderList
+        ).addEntry(payload);
+      }
+    );
+    EventEmitter.instance.on(
+      CommunicationConst.UI_Screen_GamingLogicScreen_OrderList_removeEntry,
+      (payload) => {
+        (
+          this.getComponent(
+            GamingLogicScreenComponentToken.OrderList
+          ) as OrderList
+        ).removeEntry(payload);
+      }
+    );
+  }
 
   public start(): void {
     super.start();

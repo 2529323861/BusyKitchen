@@ -1,6 +1,14 @@
 import type { LogicScreenToken } from './LogicScreenConst';
 
 export const enum CommunicationConst {
+  /** Common */
+  /**
+   * 消息列表增加条目
+   * @type {string} payload 要提示的消息内容
+   * */
+  UI_Screen_CommonScreen_MessageList_popMessage = 'UI_Screen_CommonScreen_MessageList_popMessage',
+
+  /** Gaming */
   /** 订单列表增加条目
    * @type {{
    * name: string,
@@ -16,11 +24,32 @@ export const enum CommunicationConst {
    */
   UI_Screen_GamingLogicScreen_OrderList_removeEntry = 'UI_Screen_GamingLogicScreen_OrderList_removeEntry',
 
-  /**
-   * 消息列表增加条目
-   * @type {string} payload 要提示的消息内容
-   * */
-  UI_Screen_CommonScreen_MessageList_popMessage = 'UI_Screen_CommonScreen_MessageList_popMessage',
+  /**设置当前倒计时
+   * @type {number} payload 要设置的时间
+   */
+  UI_Screen_GamingLogicScreen_CountDown_setTime = 'UI_Screen_GamingLogicScreen_CountDown_setTime',
+
+  /**设置当前得分
+   * @type {number} payload 要设置的得分
+   */
+  UI_Screen_GamingLogicScreen_Score_changeScore = 'I_Screen_GamingLogicScreen_Score_changeScore',
+
+  /** Waiting */
+  /**设置当前倒计时
+   * @type {number} payload 要设置的时间
+   */
+  UI_Screen_WaitingScreen_CountDown_setTime = 'UI_Screen_WaitingScreen_CountDown_setTime',
+
+  /** Settlement */
+  /**设置当前倒计时
+   * @type {number} payload 要设置的时间
+   */
+  UI_Screen_SettlementScreen_CountDown_setTime = 'UI_Screen_SettlementScreen_CountDown_setTime',
+
+  /**设置当前得分
+   * @type {number} payload 要设置的得分
+   */
+  UI_Screen_SettlementScreen_Score_changeScore = 'UI_Screen_SettlementScreen_Score_changeScore',
 
   /** 初始化请求，由客户端发起，表示客户端容器已初始化完毕，可以开始接收数据 */
   Init_Request = 'Init_Request',
@@ -32,6 +61,4 @@ export const enum CommunicationConst {
    * @type {LogicScreenToken} payload 要切换到的屏幕
    * */
   UI_ChangeScreen = 'UI_ChangeScreen',
-
-  UI_Screen_GamingLogicScreen_CountDown_setTime = 'UI_Screen_GamingLogicScreen_CountDown_setTime',
 }
