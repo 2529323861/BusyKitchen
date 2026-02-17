@@ -5,28 +5,28 @@
       "item": "1010",
       "name": "牛肉汤",
       "img": "picture/beef_soup.png",
-      "time": 60
+      "time": 80000
     },
     {
       "id": "1002",
       "item": "1011",
       "name": "荤汉堡",
       "img": "picture/burger_v1.png",
-      "time": 70
+      "time": 80000
     },
     {
       "id": "1003",
       "item": "1012",
       "name": "荤素汉堡",
       "img": "picture/burger_v2.png",
-      "time": 80
+      "time": 80000
     },
     {
       "id": "1004",
       "item": "1013",
       "name": "营养汉堡",
       "img": "picture/burger_v3.png",
-      "time": 90
+      "time": 80000
     }
   ]
 }
