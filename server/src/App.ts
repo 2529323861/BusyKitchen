@@ -9,6 +9,7 @@ import { ClickableMgr } from './gameplay/mgr/ClickableMgr';
 import { AnimationMgr } from './gameplay/mgr/AnimationMgr';
 import { CommunicationMgr } from './gameplay/mgr/CommunicationMgr';
 import { EventEmitter } from './framework/common/EventEmitter';
+import { OrderMgr } from './gameplay/mgr/OrderMgr';
 
 // 由于服务端中用户群体广泛，来源多样，建议在每个 t 函数中显式传入当前用户的语言标识，以确保多语言内容能够正确匹配用户所需的语言版本。
 console.log('(server)：', i18n.t('welcome_game', { lng: 'zh-CN' }));
@@ -35,6 +36,7 @@ export class App extends Singleton<App>() {
     PlayerSlotMgr.instance.init();
     AnimationMgr.instance.init();
     CommunicationMgr.instance.init();
+    OrderMgr.instance.init();
   }
 
   /** 传递启动 */
@@ -48,6 +50,7 @@ export class App extends Singleton<App>() {
     PlayerSlotMgr.instance.start();
     AnimationMgr.instance.start();
     CommunicationMgr.instance.start();
+    OrderMgr.instance.start();
 
     /** 启动更新间隔 */
     this.startUpdateInterval();
@@ -73,6 +76,7 @@ export class App extends Singleton<App>() {
     PlayerSlotMgr.instance.update(delta);
     AnimationMgr.instance.update(delta);
     CommunicationMgr.instance.update(delta);
+    OrderMgr.instance.update(delta);
   }
 
   /** 传递销毁 */
@@ -85,6 +89,7 @@ export class App extends Singleton<App>() {
     AnimationMgr.instance.destroy();
     CommunicationMgr.instance.destroy();
     EventEmitter.destroyInstance();
+    OrderMgr.instance.destroy();
 
     /** 数据最后销毁 */
     JsonDataMgr.instance.destroy();
