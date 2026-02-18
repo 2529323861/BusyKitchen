@@ -4,6 +4,7 @@ import { LogicScreenToken } from '../../const/LogicScreenConst';
 import { GameplayState } from '../../const/stateConst';
 import { Timer } from '../../const/Timer';
 import { CommunicationMgr } from '../../mgr/CommunicationMgr';
+import { InteractiveMgr } from '../../mgr/InteractiveMgr';
 import { OrderMgr } from '../../mgr/OrderMgr';
 import { ScoreMgr } from '../../mgr/ScoreMgr';
 import { TimeMgr } from '../../mgr/TimeMgr';
@@ -47,6 +48,8 @@ export class PlayingState implements IState {
       token: CommunicationConst.UI_Screen_GamingLogicScreen_Score_changeScore,
       payload: ScoreMgr.instance.getNowScore(),
     });
+    /** 启用所有可交互类 */
+    InteractiveMgr.instance.enableAllInteractive();
   }
 
   public onUpdate(deltaTime: number): void {
@@ -61,5 +64,9 @@ export class PlayingState implements IState {
     /** 停用订单派发器 */
     OrderMgr.instance.cleanOrders();
     OrderMgr.instance.inactive();
+    /** 禁用所有可交互类 */
+    InteractiveMgr.instance.disableAllInteractive();
+    /** 重置所有可交互类 */
+    InteractiveMgr.instance.resetAllInteractive();
   }
 }

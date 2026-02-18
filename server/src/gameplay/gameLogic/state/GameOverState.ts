@@ -15,7 +15,7 @@ export class GameOverState implements IState {
   /** 状态名称 */
   public name: string = GameplayState.GameOverState;
   /** 最大结算时间 */
-  private _maxTime: number = 15 * 1000;
+  private _maxTime: number = 10 * 1000;
   /** 等待计时器 */
   private _time: number = this._maxTime;
 

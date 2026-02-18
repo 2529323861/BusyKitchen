@@ -9,7 +9,6 @@ export class BaseInteractive {
   constructor(entity: GameEntity) {
     /** 绑定场景中的交互点实体 */
     this._entity = entity;
-    this.enable();
   }
 
   /** 启用交互点 */
@@ -20,6 +19,11 @@ export class BaseInteractive {
   /** 禁用交互点 */
   public disable(): void {
     this._entity.enableInteract = false;
+  }
+
+  /** 获取交互状态 */
+  public getAble(): boolean {
+    return this._entity.enableInteract;
   }
 
   /** 对交互半径进行封装 */
@@ -47,4 +51,7 @@ export class BaseInteractive {
 
   /** 销毁接口 */
   public destroy(): void {}
+
+  /** 重置 */
+  public reset(): void {}
 }

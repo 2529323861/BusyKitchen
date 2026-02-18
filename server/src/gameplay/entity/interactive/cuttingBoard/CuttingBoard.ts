@@ -256,4 +256,16 @@ export class CuttingBoard extends BaseInteractive {
       }
     }
   }
+  public reset(): void {
+    /** 清空容器 */
+    this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+    /** 获取动画用实体 */
+    const animation = AnimationMgr.instance.getAnimation(
+      this._animationToken
+    ) as CuttingBoardAnimation;
+    /** 更新动画 */
+    animation.changeAnimation(this.storageItem.src);
+    /** 切换状态为闲置状态 */
+    this._stateMachine!.transitionTo(CuttingBoardState.BoardIdleState);
+  }
 }

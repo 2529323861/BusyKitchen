@@ -226,4 +226,11 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
     });
     InteractiveMgr.destroyInstance();
   }
+
+  /** 重置所有可交互类 */
+  public resetAllInteractive(): void {
+    this._interactiveMap.forEach((value) => {
+      value.reset();
+    });
+  }
 }

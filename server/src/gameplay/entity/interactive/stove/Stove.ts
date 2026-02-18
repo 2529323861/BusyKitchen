@@ -66,4 +66,10 @@ export class Stove extends BaseInteractive {
     this._stateMachine?.update(delta);
     this._stateMachine?.getCurrentStateName();
   }
+  public reset(): void {
+    /** 清空容器 */
+    this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+    /** 状态机切换为闲置状态 */
+    this._stateMachine?.transitionTo(StoveState.StoveIdleState);
+  }
 }

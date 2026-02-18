@@ -117,4 +117,13 @@ export class AssemblyTable extends BaseInteractive {
       );
     }
   }
+  public reset(): void {
+    this._itemStack = [];
+    /** 获取组装台动画用实体 */
+    const animation = AnimationMgr.instance.getAnimation(
+      this._animationToken
+    ) as AssemblyTableAnimation;
+    /** 更新动画 */
+    animation.changeAnimation(this._itemStack);
+  }
 }
