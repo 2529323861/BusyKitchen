@@ -7,6 +7,7 @@ import { CuttingBoardClicker } from '../entity/clickable/CuttingBoardClicker';
 import { DustbinClicker } from '../entity/clickable/DustbinClicker';
 import { ItemSourceClicker } from '../entity/clickable/ItemSourceClicker';
 import { StoveClicker } from '../entity/clickable/StoveClicker';
+import { WindowClicker } from '../entity/clickable/WindowClicker';
 import type { AssemblyTable } from '../entity/interactive/AssemblyTable';
 import type { CuttingBoard } from '../entity/interactive/cuttingBoard/CuttingBoard';
 import { InteractiveMgr } from './InteractiveMgr';
@@ -160,6 +161,14 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
       new StoveClicker(
         world.querySelector('#clickPoint_STOVE_4') as GameEntity,
         InteractiveConst.BoilStove2
+      )
+    );
+    /** 注册交付窗口点击点 */
+    this.addClickable(
+      ClickableConst.WindowClicker,
+      new WindowClicker(
+        world.querySelector('#clickPoint_WINDOW') as GameEntity,
+        InteractiveConst.Window
       )
     );
 

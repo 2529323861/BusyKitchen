@@ -39,6 +39,7 @@ export class GameOverState implements IState {
       token: CommunicationConst.UI_Screen_SettlementScreen_CountDown_setTime,
       payload: this._time,
     });
+    /** 设置得分 */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_SettlementScreen_Score_changeScore,
       payload: ScoreMgr.instance.getNowScore(),

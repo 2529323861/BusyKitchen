@@ -8,6 +8,7 @@ import { Dustbin } from '../entity/interactive/Dustbin';
 import { ItemSource } from '../entity/interactive/ItemSource';
 import { BoilStove } from '../entity/interactive/stove/BoilStove';
 import { FryStove } from '../entity/interactive/stove/FryStove';
+import { Window } from '../entity/interactive/Window';
 import { JsonDataMgr } from './JsonDataMgr';
 
 export class InteractiveMgr extends Singleton<InteractiveMgr>() {
@@ -159,6 +160,11 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
         world.querySelector('#interactionPoint_ASSEMBLYTABLE_3') as GameEntity,
         AnimationConst.AssemblyTableAnimation3
       )
+    );
+    /** 注册交付窗口 */
+    this.addInteractive(
+      InteractiveConst.Window,
+      new Window(world.querySelector('#interactionPoint_WINDOW') as GameEntity)
     );
 
     /** 传递初始化 */

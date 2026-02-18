@@ -35,4 +35,6 @@ export const enum ClickableConst {
   StoveClicker3 = 'StoveClicker3',
   /** 灶台点击点4 */
   StoveClicker4 = 'StoveClicker4',
+  /** 交付窗口点击器 */
+  WindowClicker = 'WindowClicker',
 }

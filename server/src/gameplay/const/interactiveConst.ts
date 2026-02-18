@@ -35,4 +35,6 @@ export const enum InteractiveConst {
   AssemblyTable2 = 'AssemblyTable2',
   /** 组装台3 */
   AssemblyTable3 = 'AssemblyTable3',
+  /** 交付窗口 */
+  Window = 'Window',
 }

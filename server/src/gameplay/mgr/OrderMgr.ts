@@ -111,9 +111,17 @@ export class OrderMgr extends Singleton<OrderMgr>() {
    * @returns 若有订单匹配则返回true，否则返回false
    */
   public deliverOrder(item: string): boolean {
+    if (!this._active) {
+      return false;
+    }
     for (let i = 0; i < this.ordersList.length; i++) {
       if (this.ordersList[i].order.item === item) {
         this.ordersList.splice(i, 1);
+        CommunicationMgr.instance.sendBroad({
+          token:
+            CommunicationConst.UI_Screen_GamingLogicScreen_OrderList_removeEntry,
+          payload: i,
+        });
         return true;
       }
     }
