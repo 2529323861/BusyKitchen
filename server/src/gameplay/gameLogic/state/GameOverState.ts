@@ -4,6 +4,7 @@ import { LogicScreenToken } from '../../const/LogicScreenConst';
 import { GameplayState } from '../../const/stateConst';
 import { Timer } from '../../const/Timer';
 import { CommunicationMgr } from '../../mgr/CommunicationMgr';
+import { ScoreMgr } from '../../mgr/ScoreMgr';
 import { TimeMgr } from '../../mgr/TimeMgr';
 import type { BaseLogic } from '../BaseLogic';
 
@@ -32,6 +33,10 @@ export class GameOverState implements IState {
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_SettlementScreen_CountDown_setTime,
       payload: this._time,
+    });
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_Screen_SettlementScreen_Score_changeScore,
+      payload: ScoreMgr.instance.getNowScore(),
     });
     /** 切换客户端结算界面 */
     CommunicationMgr.instance.sendBroad({

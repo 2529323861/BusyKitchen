@@ -5,6 +5,7 @@ import { GameplayState } from '../../const/stateConst';
 import { Timer } from '../../const/Timer';
 import { CommunicationMgr } from '../../mgr/CommunicationMgr';
 import { OrderMgr } from '../../mgr/OrderMgr';
+import { ScoreMgr } from '../../mgr/ScoreMgr';
 import { TimeMgr } from '../../mgr/TimeMgr';
 import type { BaseLogic } from '../BaseLogic';
 
@@ -31,10 +32,16 @@ export class PlayingState implements IState {
     TimeMgr.instance.setTime(Timer.GamingCountDown, this._time);
     /** 设置订单派发器为启用 */
     OrderMgr.instance.active();
+    OrderMgr.instance.cleanOrders();
     /** 更新客户端倒计时 */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_GamingLogicScreen_CountDown_setTime,
       payload: this._time,
+    });
+    /** 更新当前得分UI */
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_Screen_GamingLogicScreen_Score_changeScore,
+      payload: ScoreMgr.instance.getNowScore(),
     });
     /** 切换客户端屏幕 */
     CommunicationMgr.instance.sendBroad({

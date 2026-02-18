@@ -40,4 +40,7 @@ export class PlayerEntityMgr extends Singleton<PlayerEntityMgr>() {
   public destroy() {
     PlayerEntityMgr.destroyInstance();
   }
+  public hasPlayer(userId: string): boolean {
+    return this._playerEntityMap.has(userId);
+  }
 }

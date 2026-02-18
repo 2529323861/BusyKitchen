@@ -1,3 +1,5 @@
+import { LogicScreenToken } from './LogicScreenConst';
+
 /** 传输消息体，用于通讯api的直接调用传参 */
 export interface ITransmitingMessage {
   /** 消息类型 */
@@ -12,4 +14,11 @@ export interface IServerPayload {
   userId: string;
   /** 消息内容,用于构造事件载荷 */
   payload: string | object | number | boolean | null | undefined;
+}
+
+export interface IInit_response {
+  /** 当前同步的屏幕 */
+  screen: string;
+  /** 当前屏幕的数据 */
+  data: [string, string | object | number | boolean | null | undefined][];
 }

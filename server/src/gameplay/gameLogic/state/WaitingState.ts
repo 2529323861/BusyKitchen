@@ -4,6 +4,7 @@ import { LogicScreenToken } from '../../const/LogicScreenConst';
 import { GameplayState } from '../../const/stateConst';
 import { Timer } from '../../const/Timer';
 import { CommunicationMgr } from '../../mgr/CommunicationMgr';
+import { ScoreMgr } from '../../mgr/ScoreMgr';
 import { TimeMgr } from '../../mgr/TimeMgr';
 import type { BaseLogic } from '../BaseLogic';
 
@@ -31,6 +32,8 @@ export class WaitingState implements IState {
     this.lastTime = this._time;
     /** 重置全局计时器 */
     TimeMgr.instance.setTime(Timer.WaitingCountDown, this._time);
+    /** 重置得分 */
+    ScoreMgr.instance.resetScore();
     /** 更新客户端倒计时UI */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_WaitingScreen_CountDown_setTime,

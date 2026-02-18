@@ -45,8 +45,8 @@ export class GameLogicMgr extends Singleton<GameLogicMgr>() {
   public addGameLogic(logic: BaseLogic, token: string): void {
     this._gameLogicMap.set(token, logic);
   }
-  public getGameLogic(token: string): void {
-    this._gameLogicMap.get(token);
+  public getGameLogic(token: string): BaseLogic | undefined {
+    return this._gameLogicMap.get(token);
   }
   public removeGameLogic(token: string): void {
     this._gameLogicMap.delete(token);
