@@ -75,6 +75,11 @@ export class OrderList extends BaseUIComponent {
 
   /** 外部可调用的删除条目 */
   public removeEntry(index: number): void {
+    console.log(`(client): 删除条目索引 ${index}`);
+    /** 不允许越界 */
+    if (index < 0 || index >= this.orderEntryList.length) {
+      return;
+    }
     /** 将目标条目加入删除中数组进行独立维护 */
     this.orderEntryListDeleted.push(this.orderEntryList[index]);
     /** 调用删除方法 */

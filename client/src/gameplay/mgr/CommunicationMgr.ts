@@ -17,9 +17,7 @@ export class CommunicationMgr extends Singleton<CommunicationMgr>() {
     /** 初始化监听 */
     this.initializeReceiver();
   }
-  public start(): void {
-    this.sendinit();
-  }
+  public start(): void {}
   private sendinit() {
     this.sendTo({
       token: CommunicationConst.Init_Request,

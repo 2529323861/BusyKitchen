@@ -44,7 +44,7 @@ export class BaseLogicScreen {
   public destroy(): void {
     console.log('(client): GameLogicScreen start');
     this._componentMap.forEach((value) => {
-      value.start();
+      value.destroy();
     });
   }
   /** 显示屏幕 */

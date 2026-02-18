@@ -32,7 +32,11 @@ export class PlayingState implements IState {
     TimeMgr.instance.setTime(Timer.GamingCountDown, this._time);
     /** 设置订单派发器为启用 */
     OrderMgr.instance.active();
-    OrderMgr.instance.cleanOrders();
+    /** 切换客户端屏幕 */
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_ChangeScreen,
+      payload: LogicScreenToken.GamingLogicScreen,
+    });
     /** 更新客户端倒计时 */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_GamingLogicScreen_CountDown_setTime,
@@ -42,11 +46,6 @@ export class PlayingState implements IState {
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_GamingLogicScreen_Score_changeScore,
       payload: ScoreMgr.instance.getNowScore(),
-    });
-    /** 切换客户端屏幕 */
-    CommunicationMgr.instance.sendBroad({
-      token: CommunicationConst.UI_ChangeScreen,
-      payload: LogicScreenToken.GamingLogicScreen,
     });
   }
 
@@ -60,6 +59,7 @@ export class PlayingState implements IState {
   public onExit(nextState: string): void {
     console.log('(server): PlayingState onExit');
     /** 停用订单派发器 */
+    OrderMgr.instance.cleanOrders();
     OrderMgr.instance.inactive();
   }
 }

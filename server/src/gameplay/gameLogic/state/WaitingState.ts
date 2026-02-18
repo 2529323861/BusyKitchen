@@ -34,15 +34,15 @@ export class WaitingState implements IState {
     TimeMgr.instance.setTime(Timer.WaitingCountDown, this._time);
     /** 重置得分 */
     ScoreMgr.instance.resetScore();
-    /** 更新客户端倒计时UI */
-    CommunicationMgr.instance.sendBroad({
-      token: CommunicationConst.UI_Screen_WaitingScreen_CountDown_setTime,
-      payload: this._time,
-    });
     /** 切换屏幕 */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_ChangeScreen,
       payload: LogicScreenToken.WaitingScreen,
+    });
+    /** 更新客户端倒计时UI */
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_Screen_WaitingScreen_CountDown_setTime,
+      payload: this._time,
     });
   }
 

@@ -29,6 +29,11 @@ export class GameOverState implements IState {
     this._time = this._maxTime;
     /** 设置全局计时器 */
     TimeMgr.instance.setTime(Timer.SettlementCountDown, this._time);
+    /** 切换客户端结算界面 */
+    CommunicationMgr.instance.sendBroad({
+      token: CommunicationConst.UI_ChangeScreen,
+      payload: LogicScreenToken.SettlementScreen,
+    });
     /** 更新客户端计时器 */
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_SettlementScreen_CountDown_setTime,
@@ -37,11 +42,6 @@ export class GameOverState implements IState {
     CommunicationMgr.instance.sendBroad({
       token: CommunicationConst.UI_Screen_SettlementScreen_Score_changeScore,
       payload: ScoreMgr.instance.getNowScore(),
-    });
-    /** 切换客户端结算界面 */
-    CommunicationMgr.instance.sendBroad({
-      token: CommunicationConst.UI_ChangeScreen,
-      payload: LogicScreenToken.SettlementScreen,
     });
   }
 

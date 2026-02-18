@@ -1,5 +1,6 @@
 import { init } from 'i18next';
 import { Singleton } from '../../framework/common/Singleton';
+import { CommunicationMgr } from './CommunicationMgr';
 
 export class PlayerEntityMgr extends Singleton<PlayerEntityMgr>() {
   private _playerEntityMap: Map<string, GamePlayerEntity> = new Map();
@@ -21,6 +22,7 @@ export class PlayerEntityMgr extends Singleton<PlayerEntityMgr>() {
     /** 当玩家退出游戏时，删除该映射 */
     world.onPlayerLeave(({ entity }) => {
       this._playerEntityMap.delete(entity.player.userId);
+      CommunicationMgr.instance.removePlayInLiving(entity.player.userId);
     });
   }
 

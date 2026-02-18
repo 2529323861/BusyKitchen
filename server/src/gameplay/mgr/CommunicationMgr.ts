@@ -39,6 +39,11 @@ export class CommunicationMgr extends Singleton<CommunicationMgr>() {
     this.bindeventToken?.cancel();
     CommunicationMgr.destroyInstance();
   }
+  /** 从可通讯列表中移除玩家 */
+  public removePlayInLiving(userId: string) {
+    const index = this.livingPlayerList.indexOf(userId);
+    this.livingPlayerList.splice(index, 1);
+  }
 
   private bindevent() {
     EventEmitter.instance.on(CommunicationConst.Init_Request, (payload) => {

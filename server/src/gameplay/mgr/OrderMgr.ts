@@ -96,6 +96,14 @@ export class OrderMgr extends Singleton<OrderMgr>() {
     if (!this._active) {
       return;
     }
+    if (index < this.ordersList.length) {
+      this.ordersList.splice(index, 1);
+      CommunicationMgr.instance.sendBroad({
+        token:
+          CommunicationConst.UI_Screen_GamingLogicScreen_OrderList_removeEntry,
+        payload: index,
+      });
+    }
   }
   /**
    * 交付物品
@@ -115,6 +123,13 @@ export class OrderMgr extends Singleton<OrderMgr>() {
    * 清空订单，用于重置类
    */
   public cleanOrders(): void {
+    for (let i = 0; i < this.ordersList.length; i++) {
+      CommunicationMgr.instance.sendBroad({
+        token:
+          CommunicationConst.UI_Screen_GamingLogicScreen_OrderList_removeEntry,
+        payload: 0,
+      });
+    }
     this.ordersList = [];
   }
 
