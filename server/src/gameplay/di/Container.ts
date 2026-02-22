@@ -36,7 +36,11 @@ export class Container extends Singleton<Container>() {
     /** 注册玩家相关依赖 */
     this.register<IPlayerService>(
       SERVICE_TOKENS.PLAYER_SERVICE,
-      new PlayerServiceImpl(PlayerSlotMgr.instance, PlayerEntityMgr.instance)
+      new PlayerServiceImpl(
+        PlayerSlotMgr.instance,
+        PlayerEntityMgr.instance,
+        CommunicationMgr.instance
+      )
     );
     /** 注册数据相关依赖 */
     this.register<IDataService>(

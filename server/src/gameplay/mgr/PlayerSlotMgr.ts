@@ -57,17 +57,6 @@ export class PlayerSlotMgr extends Singleton<PlayerSlotMgr>() {
    */
   public setPlayerSlot(userId: string, item: IItemData): void {
     this._playerSlotMap.set(userId, item);
-    CommunicationMgr.instance.sendTo(
-      PlayerEntityMgr.instance.getPlayerEntity(userId) as GamePlayerEntity,
-      {
-        token: CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-        payload: `已获得 ${item.name}`,
-      }
-    );
-    console.log(
-      `(server): 已将 ${item.name} 放入玩家 ${(PlayerEntityMgr.instance.getPlayerEntity(userId) as GamePlayerEntity).player.name} 的背包`
-    );
-    /** 这里预留逻辑用于更新UI */
   }
 
   /**
