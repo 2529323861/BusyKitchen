@@ -9,7 +9,6 @@ import { ItemSource } from '../entity/interactive/ItemSource';
 import { BoilStove } from '../entity/interactive/stove/BoilStove';
 import { FryStove } from '../entity/interactive/stove/FryStove';
 import { Window } from '../entity/interactive/Window';
-import { JsonDataMgr } from './JsonDataMgr';
 
 export class InteractiveMgr extends Singleton<InteractiveMgr>() {
   private _interactiveMap: Map<string, BaseInteractive> = new Map();
@@ -23,7 +22,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.PlateSource,
       new ItemSource(
         world.querySelector('#interactionPoint_PLATE') as GameEntity,
-        JsonDataMgr.instance.getDateFromItemMap('1001')
+        '1001'
       )
     );
     /** 注册无限番茄源 */
@@ -31,7 +30,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.TomatoSource,
       new ItemSource(
         world.querySelector('#interactionPoint_TOMATO') as GameEntity,
-        JsonDataMgr.instance.getDateFromItemMap('1008')
+        '1008'
       )
     );
     /** 注册无限面包源 */
@@ -39,7 +38,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.BreadSource,
       new ItemSource(
         world.querySelector('#interactionPoint_BREAD') as GameEntity,
-        JsonDataMgr.instance.getDateFromItemMap('1002')
+        '1002'
       )
     );
     /** 注册无限生牛肉源 */
@@ -47,7 +46,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.BeefSource,
       new ItemSource(
         world.querySelector('#interactionPoint_BEEF') as GameEntity,
-        JsonDataMgr.instance.getDateFromItemMap('1003')
+        '1003'
       )
     );
     /** 注册无限生菜源 */
@@ -55,7 +54,7 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       InteractiveConst.LettuceSource,
       new ItemSource(
         world.querySelector('#interactionPoint_LETTUCE') as GameEntity,
-        JsonDataMgr.instance.getDateFromItemMap('1006')
+        '1006'
       )
     );
     /** 注册1号刀板 */
