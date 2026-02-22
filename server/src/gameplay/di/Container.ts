@@ -3,16 +3,22 @@ import { Singleton } from '../../framework/common/Singleton';
 import { AnimationMgr } from '../mgr/AnimationMgr';
 import { CommunicationMgr } from '../mgr/CommunicationMgr';
 import { JsonDataMgr } from '../mgr/JsonDataMgr';
+import { OrderMgr } from '../mgr/OrderMgr';
 import { PlayerEntityMgr } from '../mgr/PlayerEntityMgr';
 import { PlayerSlotMgr } from '../mgr/PlayerSlotMgr';
+import { ScoreMgr } from '../mgr/ScoreMgr';
 import { AnimationServiceImpl } from '../service/implementation/AnimationServiceImpl';
 import { CommunicationServiceImpl } from '../service/implementation/CommunicationServiceImpl';
 import { DataServiceImpl } from '../service/implementation/DataServiceImpl';
+import { OrderServieImpl } from '../service/implementation/OrderServiceImpl';
 import { PlayerServiceImpl } from '../service/implementation/PlayerServiceImpl';
+import { ScoreServiceImpl } from '../service/implementation/ScoreServiceImpl';
 import type { IAnimationService } from '../service/interface/IAnimationService';
 import type { ICommunicationService } from '../service/interface/ICommunicationService';
 import type { IDataService } from '../service/interface/IDataService';
+import type { IOrderService } from '../service/interface/IOrderService';
 import type { IPlayerService } from '../service/interface/IPlayerService';
+import type { IScoreService } from '../service/interface/IScoreService';
 import { SERVICE_TOKENS } from './tokens';
 
 export class Container extends Singleton<Container>() {
@@ -57,8 +63,19 @@ export class Container extends Singleton<Container>() {
       SERVICE_TOKENS.COMMUNICATION_SERVICE,
       new CommunicationServiceImpl(
         CommunicationMgr.instance,
-        PlayerEntityMgr.instance
+        PlayerEntityMgr.instance,
+        ScoreMgr.instance
       )
+    );
+    /** 注册得分相关依赖 */
+    this.register<IScoreService>(
+      SERVICE_TOKENS.SCORE_SERVICE,
+      new ScoreServiceImpl(ScoreMgr.instance)
+    );
+    /** 注册订单相关依赖 */
+    this.register<IOrderService>(
+      SERVICE_TOKENS.ORDER_SERVICE,
+      new OrderServieImpl(OrderMgr.instance)
     );
   }
 }

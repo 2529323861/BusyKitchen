@@ -7,4 +7,6 @@ export interface ICommunicationService {
   sendBroad(data: ITransmitingMessage): void;
   /** 向指定id的玩家弹出提示（是发送数据的柯里化函数，简化调用） */
   popMessageToPlayer(userId: string, message: string): void;
+  /** 更新所有玩家的当前得分（是发送数据的柯里化函数，简化调用） */
+  updateScore(): void;
 }
