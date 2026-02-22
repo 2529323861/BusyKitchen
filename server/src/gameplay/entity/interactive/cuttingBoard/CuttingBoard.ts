@@ -21,7 +21,7 @@ import type { ICommunicationService } from '../../../service/interface/ICommunic
 
 export class CuttingBoard extends BaseInteractive {
   /** 刀板暂存物 */
-  public storageItem: IItemData;
+  public storageItem: IItemData | undefined;
 
   private _animationToken: string;
 
@@ -63,9 +63,6 @@ export class CuttingBoard extends BaseInteractive {
       Container.instance.resolve<ICommunicationService>(
         SERVICE_TOKENS.COMMUNICATION_SERVICE
       );
-
-    /** 刀板暂存物，默认为空 */
-    this.storageItem = this.dataService.getDateFromItemMap('1000');
   }
   public init(): void {
     this.storageItem = this.dataService.getDateFromItemMap('1000');
@@ -155,7 +152,7 @@ export class CuttingBoard extends BaseInteractive {
             /** 将容器中物品取出 */
             this.playerService.setPlayerSlot(
               entity.player.userId,
-              this.storageItem
+              this.storageItem as IItemData
             );
             this.storageItem = this.dataService.getDateFromItemMap('1000');
 
@@ -193,7 +190,7 @@ export class CuttingBoard extends BaseInteractive {
             const product = this.dataService.getDateFromItemMap(
               (
                 this.dataService.searchCuttingTable(
-                  this.storageItem.id
+                  (this.storageItem as IItemData).id
                 ) as IConvertRecipe
               ).product
             );
@@ -253,7 +250,7 @@ export class CuttingBoard extends BaseInteractive {
         console.log('(server): 刀板点击次数达到，切换至完成状态');
         /** 更新动画 */
         const { product } = this.dataService.searchCuttingTable(
-          this.storageItem.id
+          (this.storageItem as IItemData).id
         )!;
 
         animation.changeAnimation(

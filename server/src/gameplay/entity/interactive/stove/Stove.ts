@@ -23,7 +23,7 @@ import type { IStoveStrategyg } from './strategy/IStoveStrategy';
 export class Stove extends BaseInteractive {
   public readonly _stoveProgressAnimationToken: string;
 
-  protected storageItem: IItemData;
+  protected storageItem: IItemData | undefined;
 
   /** 策略 */
   protected stoveStrategy: IStoveStrategyg;
@@ -63,11 +63,10 @@ export class Stove extends BaseInteractive {
       Container.instance.resolve<ICommunicationService>(
         SERVICE_TOKENS.COMMUNICATION_SERVICE
       );
-
-    this.storageItem = this.dataService.getDateFromItemMap('1000');
   }
 
   public init(): void {
+    this.storageItem = this.dataService.getDateFromItemMap('1000');
     this.interactRadius = 3;
     const stateConfig: IStateConfig = {
       initialState: StoveState.StoveIdleState,
@@ -168,7 +167,7 @@ export class Stove extends BaseInteractive {
           const product = this.dataService.getDateFromItemMap(
             (
               this.stoveStrategy.searchRecipe(
-                this.storageItem.id
+                (this.storageItem as IItemData).id
               ) as IConvertRecipe
             ).product
           );
