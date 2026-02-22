@@ -1,3 +1,4 @@
+import { CommunicationConst } from '../../../../../shares/communicationConst';
 import type { ITransmitingMessage } from '../../../../../shares/communicationInterface';
 import type { CommunicationMgr } from '../../mgr/CommunicationMgr';
 import type { PlayerEntityMgr } from '../../mgr/PlayerEntityMgr';
@@ -18,5 +19,12 @@ export class CommunicationServiceImpl implements ICommunicationService {
   }
   sendBroad(data: ITransmitingMessage): void {
     this.communicationMgr.sendBroad(data);
+  }
+
+  popMessageToPlayer(userId: string, message: string): void {
+    this.sendTo(userId, {
+      token: CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+      payload: message,
+    });
   }
 }

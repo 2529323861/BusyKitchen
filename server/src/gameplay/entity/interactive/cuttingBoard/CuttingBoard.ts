@@ -137,11 +137,10 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中的东西不可以切 */
             console.log('(server): 玩家用不可交互物品交互闲置刀板');
             /** 留空做UI通知 */
-            this.communicationService.sendTo(entity.player.userId, {
-              token:
-                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-              payload: `这个东西不能切`,
-            });
+            this.communicationService.popMessageToPlayer(
+              entity.player.userId,
+              `这个东西不能切`
+            );
           }
         }
         break;
@@ -170,20 +169,18 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中不为空，不可取出物品 */
             console.log('(server): 玩家无法取出未开始刀板');
             /** 预留UI接口 */
-            this.communicationService.sendTo(entity.player.userId, {
-              token:
-                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-              payload: `手上放不下了`,
-            });
+            this.communicationService.popMessageToPlayer(
+              entity.player.userId,
+              `手上放不下了`
+            );
           }
         }
         break;
       case CuttingBoardState.CuttingState:
-        this.communicationService.sendTo(entity.player.userId, {
-          token:
-            CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-          payload: `加工中，请结束后再取出`,
-        });
+        this.communicationService.popMessageToPlayer(
+          entity.player.userId,
+          `加工中，请结束后再取出`
+        );
         break;
       case CuttingBoardState.CuttingFinishState:
         {
@@ -215,11 +212,10 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中不为空，不可取出物品 */
             console.log('(server): 玩家无法取出结束刀板');
             /** 预留UI接口 */
-            this.communicationService.sendTo(entity.player.userId, {
-              token:
-                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-              payload: `手上放不下了`,
-            });
+            this.communicationService.popMessageToPlayer(
+              entity.player.userId,
+              `手上放不下了`
+            );
           }
         }
         break;
