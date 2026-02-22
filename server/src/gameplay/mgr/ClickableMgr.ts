@@ -171,11 +171,6 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
         InteractiveConst.Window
       )
     );
-
-    /** 传递初始化 */
-    this._clickableMap.forEach((value) => {
-      value.init();
-    });
   }
 
   /** 添加点击点 */
@@ -193,8 +188,22 @@ export class ClickableMgr extends Singleton<ClickableMgr>() {
     this._clickableMap.delete(token);
   }
 
-  public start(): void {}
-  public update(delta: number): void {}
+  public start(): void {
+    /** 传递初始化 */
+    this._clickableMap.forEach((value) => {
+      value.init();
+    });
+    /** 传递启动 */
+    this._clickableMap.forEach((value) => {
+      value.start();
+    });
+  }
+  public update(delta: number): void {
+    /** 传递更新 */
+    this._clickableMap.forEach((value) => {
+      value.update(delta);
+    });
+  }
   public destroy(): void {
     ClickableMgr.destroyInstance();
   }

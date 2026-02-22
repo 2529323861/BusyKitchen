@@ -73,10 +73,6 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
       AnimationConst.StoveProgressbarAnimation4,
       new StoveProgressbarAnimation(new GameVector3(47, 10, 41))
     );
-    /** 传递初始化 */
-    this._animationMap.forEach((value) => {
-      value.init();
-    });
   }
 
   /** 添加动画实体 */
@@ -94,8 +90,23 @@ export class AnimationMgr extends Singleton<AnimationMgr>() {
     this._animationMap.delete(token);
   }
 
-  public start(): void {}
-  public update(delta: number): void {}
+  public start(): void {
+    /** 传递初始化 */
+    this._animationMap.forEach((value) => {
+      value.init();
+    });
+
+    /** 传递启动 */
+    this._animationMap.forEach((value) => {
+      value.start();
+    });
+  }
+  public update(delta: number): void {
+    /** 传递更新 */
+    this._animationMap.forEach((value) => {
+      value.update(delta);
+    });
+  }
   public destroy(): void {
     /** 传递销毁 */
     this._animationMap.forEach((value) => {

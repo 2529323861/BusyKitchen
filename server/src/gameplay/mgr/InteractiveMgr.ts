@@ -167,10 +167,6 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
       new Window(world.querySelector('#interactionPoint_WINDOW') as GameEntity)
     );
 
-    /** 传递初始化 */
-    this._interactiveMap.forEach((value) => {
-      value.init();
-    });
     this.bindevent();
   }
 
@@ -206,6 +202,10 @@ export class InteractiveMgr extends Singleton<InteractiveMgr>() {
   }
 
   public start(): void {
+    /** 传递初始化 */
+    this._interactiveMap.forEach((value) => {
+      value.init();
+    });
     /** 传递启动 */
     this._interactiveMap.forEach((value) => {
       value.start();

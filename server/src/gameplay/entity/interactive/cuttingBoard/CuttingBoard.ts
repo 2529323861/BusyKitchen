@@ -7,21 +7,21 @@ import type {
   ICuttingTableData,
   IItemData,
 } from '../../../jsonData/DataInterface';
-import { JsonDataMgr } from '../../../mgr/JsonDataMgr';
 import { NotStartedState } from './state/NotStartedState';
 import { CuttingState } from './state/CuttingState';
 import { CuttingFinishState } from './state/CuttingFinishState';
-import { PlayerSlotMgr } from '../../../mgr/PlayerSlotMgr';
-import { AnimationMgr } from '../../../mgr/AnimationMgr';
 import type { CuttingBoardAnimation } from '../../AnimationEntity/CuttingBoardAnimation';
-import { CommunicationMgr } from '../../../mgr/CommunicationMgr';
-import { PlayerEntityMgr } from '../../../mgr/PlayerEntityMgr';
 import { CommunicationConst } from '../../../../../../shares/communicationConst';
+import type { IPlayerService } from '../../../service/interface/IPlayerService';
+import { Container } from '../../../di/Container';
+import { SERVICE_TOKENS } from '../../../di/tokens';
+import type { IDataService } from '../../../service/interface/IDataService';
+import type { IAnimationService } from '../../../service/interface/IAnimationService';
+import type { ICommunicationService } from '../../../service/interface/ICommunicationService';
 
 export class CuttingBoard extends BaseInteractive {
-  /** 刀板暂存物默认为空 */
-  public storageItem: IItemData =
-    JsonDataMgr.instance.getDateFromItemMap('1000');
+  /** 刀板暂存物 */
+  public storageItem: IItemData;
 
   private _animationToken: string;
 
@@ -31,12 +31,44 @@ export class CuttingBoard extends BaseInteractive {
   /** 最大点击次数 */
   private MAX_CLICK_COUNT = 3;
 
+  /** 玩家服务 */
+  private playerService: IPlayerService;
+
+  /** 数据服务 */
+  private dataService: IDataService;
+
+  /** 动画服务 */
+  private animationService: IAnimationService;
+
+  /** 通讯服务 */
+  private communicationService: ICommunicationService;
+
   constructor(entity: GameEntity, animationToken: string) {
     super(entity);
     this._animationToken = animationToken;
+    /** 注入玩家数据依赖 */
+    this.playerService = Container.instance.resolve<IPlayerService>(
+      SERVICE_TOKENS.PLAYER_SERVICE
+    );
+    /** 注入数据服务 */
+    this.dataService = Container.instance.resolve<IDataService>(
+      SERVICE_TOKENS.DATA_SERVICE
+    );
+    /** 注入动画服务 */
+    this.animationService = Container.instance.resolve<IAnimationService>(
+      SERVICE_TOKENS.ANIMATION_SERVICE
+    );
+    /** 注入通讯服务 */
+    this.communicationService =
+      Container.instance.resolve<ICommunicationService>(
+        SERVICE_TOKENS.COMMUNICATION_SERVICE
+      );
+
+    /** 刀板暂存物，默认为空 */
+    this.storageItem = this.dataService.getDateFromItemMap('1000');
   }
   public init(): void {
-    this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+    this.storageItem = this.dataService.getDateFromItemMap('1000');
     this.interactRadius = 3;
     const stateConfig: IStateConfig = {
       initialState: CuttingBoardState.BoardIdleState,
@@ -78,23 +110,23 @@ export class CuttingBoard extends BaseInteractive {
   /** 交互回调封装 */
   public interactCallBack(entity: GamePlayerEntity): void {
     /** 获取对应动画用实体 */
-    const animation = AnimationMgr.instance.getAnimation(
+    const animation = this.animationService.getAnimation(
       this._animationToken
     ) as CuttingBoardAnimation;
     switch (this._stateMachine?.getCurrentStateName()) {
       case CuttingBoardState.BoardIdleState:
         {
-          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+          const playerItem = this.playerService.getPlayerSlot(
             entity.player.userId
           );
-          if (JsonDataMgr.instance.searchCuttingTable(playerItem.id)) {
+          if (this.dataService.searchCuttingTable(playerItem.id)) {
             /** 玩家手中的东西可以切 */
             /** 将玩家手中的东西放入刀板 */
             this.storageItem = playerItem;
             /** 将空放入玩家手中 */
-            PlayerSlotMgr.instance.setPlayerSlot(
+            this.playerService.setPlayerSlot(
               entity.player.userId,
-              JsonDataMgr.instance.getDateFromItemMap('1000')
+              this.dataService.getDateFromItemMap('1000')
             );
             /** 状态切换至未开始状态 */
             /** 更新动画 */
@@ -105,33 +137,28 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中的东西不可以切 */
             console.log('(server): 玩家用不可交互物品交互闲置刀板');
             /** 留空做UI通知 */
-            CommunicationMgr.instance.sendTo(
-              PlayerEntityMgr.instance.getPlayerEntity(
-                entity.player.userId
-              ) as GamePlayerEntity,
-              {
-                token:
-                  CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-                payload: `这个东西不能切`,
-              }
-            );
+            this.communicationService.sendTo(entity.player.userId, {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `这个东西不能切`,
+            });
           }
         }
         break;
       case CuttingBoardState.NotStartedState:
         {
-          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+          const playerItem = this.playerService.getPlayerSlot(
             entity.player.userId
           );
           if (playerItem.id === '1000') {
             /** 玩家手中物品为空 */
 
             /** 将容器中物品取出 */
-            PlayerSlotMgr.instance.setPlayerSlot(
+            this.playerService.setPlayerSlot(
               entity.player.userId,
               this.storageItem
             );
-            this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+            this.storageItem = this.dataService.getDateFromItemMap('1000');
 
             /** 更新动画 */
             animation.changeAnimation(this.storageItem.src);
@@ -143,50 +170,40 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中不为空，不可取出物品 */
             console.log('(server): 玩家无法取出未开始刀板');
             /** 预留UI接口 */
-            CommunicationMgr.instance.sendTo(
-              PlayerEntityMgr.instance.getPlayerEntity(
-                entity.player.userId
-              ) as GamePlayerEntity,
-              {
-                token:
-                  CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-                payload: `手上放不下了`,
-              }
-            );
+            this.communicationService.sendTo(entity.player.userId, {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `手上放不下了`,
+            });
           }
         }
         break;
       case CuttingBoardState.CuttingState:
-        CommunicationMgr.instance.sendTo(
-          PlayerEntityMgr.instance.getPlayerEntity(
-            entity.player.userId
-          ) as GamePlayerEntity,
-          {
-            token:
-              CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-            payload: `加工中，请结束后再取出`,
-          }
-        );
+        this.communicationService.sendTo(entity.player.userId, {
+          token:
+            CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+          payload: `加工中，请结束后再取出`,
+        });
         break;
       case CuttingBoardState.CuttingFinishState:
         {
-          const playerItem = PlayerSlotMgr.instance.getPlayerSlot(
+          const playerItem = this.playerService.getPlayerSlot(
             entity.player.userId
           );
           if (playerItem.id === '1000') {
             /** 玩家手中物品为空 */
 
-            const product = JsonDataMgr.instance.getDateFromItemMap(
+            const product = this.dataService.getDateFromItemMap(
               (
-                JsonDataMgr.instance.searchCuttingTable(
+                this.dataService.searchCuttingTable(
                   this.storageItem.id
                 ) as ICuttingTableData
               ).product
             );
 
             /** 将刀板中物品根据配方的合成产物取出 */
-            PlayerSlotMgr.instance.setPlayerSlot(entity.player.userId, product);
-            this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+            this.playerService.setPlayerSlot(entity.player.userId, product);
+            this.storageItem = this.dataService.getDateFromItemMap('1000');
 
             /** 更新动画 */
             animation.changeAnimation(this.storageItem.src);
@@ -198,16 +215,11 @@ export class CuttingBoard extends BaseInteractive {
             /** 玩家手中不为空，不可取出物品 */
             console.log('(server): 玩家无法取出结束刀板');
             /** 预留UI接口 */
-            CommunicationMgr.instance.sendTo(
-              PlayerEntityMgr.instance.getPlayerEntity(
-                entity.player.userId
-              ) as GamePlayerEntity,
-              {
-                token:
-                  CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
-                payload: `手上放不下了`,
-              }
-            );
+            this.communicationService.sendTo(entity.player.userId, {
+              token:
+                CommunicationConst.UI_Screen_CommonScreen_MessageList_popMessage,
+              payload: `手上放不下了`,
+            });
           }
         }
         break;
@@ -217,7 +229,7 @@ export class CuttingBoard extends BaseInteractive {
   /** 点击接口，用于处理点击事件 */
   public click(): void {
     /** 获取动画用实体 */
-    const animation = AnimationMgr.instance.getAnimation(
+    const animation = this.animationService.getAnimation(
       this._animationToken
     ) as CuttingBoardAnimation;
     if (
@@ -244,12 +256,12 @@ export class CuttingBoard extends BaseInteractive {
         /** 切换至切菜完成状态 */
         console.log('(server): 刀板点击次数达到，切换至完成状态');
         /** 更新动画 */
-        const { product } = JsonDataMgr.instance.searchCuttingTable(
+        const { product } = this.dataService.searchCuttingTable(
           this.storageItem.id
         )!;
 
         animation.changeAnimation(
-          JsonDataMgr.instance.getDateFromItemMap(product).src
+          this.dataService.getDateFromItemMap(product).src
         );
 
         this._stateMachine.transitionTo(CuttingBoardState.CuttingFinishState);
@@ -258,9 +270,9 @@ export class CuttingBoard extends BaseInteractive {
   }
   public reset(): void {
     /** 清空容器 */
-    this.storageItem = JsonDataMgr.instance.getDateFromItemMap('1000');
+    this.storageItem = this.dataService.getDateFromItemMap('1000');
     /** 获取动画用实体 */
-    const animation = AnimationMgr.instance.getAnimation(
+    const animation = this.animationService.getAnimation(
       this._animationToken
     ) as CuttingBoardAnimation;
     /** 更新动画 */

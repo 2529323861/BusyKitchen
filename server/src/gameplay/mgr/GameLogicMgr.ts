@@ -13,16 +13,15 @@ export class GameLogicMgr extends Singleton<GameLogicMgr>() {
   public init(): void {
     this.bindevent();
     this.addGameLogic(new MainLogic(), LogicConst.MainLogic);
-
-    /** 传递初始化至所有逻辑 */
-    this._gameLogicMap.forEach((value) => {
-      value.init();
-    });
   }
 
   private bindevent(): void {}
 
   public start(): void {
+    /** 传递初始化至所有逻辑 */
+    this._gameLogicMap.forEach((value) => {
+      value.init();
+    });
     /** 传递启动至所有逻辑 */
     this._gameLogicMap.forEach((value) => {
       value.start();
