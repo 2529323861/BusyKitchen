@@ -1,9 +1,8 @@
 import type {
   IItemData,
-  ICuttingTableData,
-  IBoilTableData,
   IAssemblyFormulaData,
   IOrdersData,
+  IConvertRecipe,
 } from '../../jsonData/DataInterface';
 import type { JsonDataMgr } from '../../mgr/JsonDataMgr';
 import type { IDataService } from '../interface/IDataService';
@@ -14,13 +13,13 @@ export class DataServiceImpl implements IDataService {
   getDateFromItemMap(id: string): IItemData {
     return this.jsonDataMgr.getDateFromItemMap(id);
   }
-  searchCuttingTable(material: string): ICuttingTableData | undefined {
+  searchCuttingTable(material: string): IConvertRecipe | undefined {
     return this.jsonDataMgr.searchCuttingTable(material);
   }
-  searchBoilTable(material: string): IBoilTableData | undefined {
+  searchBoilTable(material: string): IConvertRecipe | undefined {
     return this.jsonDataMgr.searchBoilTable(material);
   }
-  searchFryTable(material: string): ICuttingTableData | undefined {
+  searchFryTable(material: string): IConvertRecipe | undefined {
     return this.jsonDataMgr.searchFryTable(material);
   }
   searchAssemblyFormula(
