@@ -1,11 +1,9 @@
 import { Singleton } from '../../framework/common/Singleton';
 import type {
   IItemData,
-  ICuttingTableData,
-  IBoilTableData,
-  IFryTableData,
   IAssemblyFormulaData,
   IOrdersData,
+  IConvertRecipe,
 } from '../jsonData/DataInterface';
 import { item } from '../jsonData/item.json';
 import { cuttingTable } from '../jsonData/cuttingTable.json';
@@ -16,9 +14,9 @@ import { orders } from '../jsonData/orders.json';
 
 export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   private _itemMap: Map<string, IItemData> = new Map();
-  private _cuttingTableArray: Array<ICuttingTableData> = [];
-  private _boilTableArray: Array<IBoilTableData> = [];
-  private _fryTableArray: Array<IFryTableData> = [];
+  private _cuttingTableArray: Array<IConvertRecipe> = [];
+  private _boilTableArray: Array<IConvertRecipe> = [];
+  private _fryTableArray: Array<IConvertRecipe> = [];
   private _assemblyFormula: Array<IAssemblyFormulaData> = [];
   private _ordersDataArray: Array<IOrdersData> = [];
 
@@ -63,17 +61,17 @@ export class JsonDataMgr extends Singleton<JsonDataMgr>() {
   }
 
   /** 检索切菜表配方 */
-  public searchCuttingTable(material: string): ICuttingTableData | undefined {
+  public searchCuttingTable(material: string): IConvertRecipe | undefined {
     return this._cuttingTableArray.find((value) => value.material === material);
   }
 
   /** 检索水煮表配方 */
-  public searchBoilTable(material: string): IBoilTableData | undefined {
+  public searchBoilTable(material: string): IConvertRecipe | undefined {
     return this._boilTableArray.find((value) => value.material === material);
   }
 
-  /** 检索切菜表配方 */
-  public searchFryTable(material: string): ICuttingTableData | undefined {
+  /** 检索煎锅表配方 */
+  public searchFryTable(material: string): IConvertRecipe | undefined {
     return this._fryTableArray.find((value) => value.material === material);
   }
 

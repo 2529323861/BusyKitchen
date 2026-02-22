@@ -4,7 +4,7 @@ import { BaseInteractive } from '../BaseInteractive';
 import { CuttingBoardState } from '../../../const/stateConst';
 import { BoardIdleState } from './state/BoardIdleState';
 import type {
-  ICuttingTableData,
+  IConvertRecipe,
   IItemData,
 } from '../../../jsonData/DataInterface';
 import { NotStartedState } from './state/NotStartedState';
@@ -194,7 +194,7 @@ export class CuttingBoard extends BaseInteractive {
               (
                 this.dataService.searchCuttingTable(
                   this.storageItem.id
-                ) as ICuttingTableData
+                ) as IConvertRecipe
               ).product
             );
 

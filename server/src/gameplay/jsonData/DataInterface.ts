@@ -5,17 +5,8 @@ export interface IItemData {
   src: GameModelAssets;
   hight: number;
 }
-export interface ICuttingTableData {
-  material: string;
-  product: string;
-}
 
-export interface IBoilTableData {
-  material: string;
-  product: string;
-}
-
-export interface IFryTableData {
+export interface IConvertRecipe {
   material: string;
   product: string;
 }
